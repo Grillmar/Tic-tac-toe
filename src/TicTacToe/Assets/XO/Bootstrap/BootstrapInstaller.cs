@@ -1,4 +1,5 @@
-﻿using XO.Modules.Machine;
+﻿using XO.Modules.Loader;
+using XO.Modules.Machine;
 using XO.Modules.States;
 using Zenject;
 
@@ -9,6 +10,8 @@ namespace XO.Bootstrap
 
     public override void InstallBindings()
     {
+      Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
+      
       Container
         .BindStateMachine()
         .BindStates()
