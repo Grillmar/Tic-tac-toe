@@ -9,6 +9,7 @@ namespace XO.Modules.States
     {
       container.Bind<BootstrapState>().AsSingle();
       container.Bind<MainState>().AsSingle();
+      container.Bind<LoadMainState>().AsSingle();
       container.Bind<LoadGameState>().AsSingle();
       container.Bind<GameState>().AsSingle();
       
