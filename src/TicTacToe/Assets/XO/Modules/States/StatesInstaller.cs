@@ -8,6 +8,7 @@ namespace XO.Modules.States
     public static DiContainer BindStates(this DiContainer container)
     {
       container.Bind<BootstrapState>().AsSingle();
+      container.Bind<MainState>().AsSingle();
       
       return container;
     }

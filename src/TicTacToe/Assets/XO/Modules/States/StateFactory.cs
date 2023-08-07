@@ -16,6 +16,7 @@ namespace XO.Modules.States
       new Dictionary<Type, Func<IExitableState>>()
       {
         [typeof(BootstrapState)] = diContainer.Resolve<BootstrapState>,
+        [typeof(MainState)] = diContainer.Resolve<MainState>,
       };
 
     public TState GetState<TState>() where TState : class, IExitableState => 
