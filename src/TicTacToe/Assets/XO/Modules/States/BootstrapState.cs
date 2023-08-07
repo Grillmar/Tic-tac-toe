@@ -33,6 +33,7 @@ namespace XO.Modules.States
     {
       await _sceneLoader.LoadScene(Main);
       _stateMachine.Enter<MainState>();
+      _loadingCurtain.Hide();
     }
   }
 }
