@@ -131,6 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 82586128}
   - component: {fileID: 82586127}
+  - component: {fileID: 82586129}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -151,7 +152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 82586129}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -183,6 +185,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &82586129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82586126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e73c6f8f1b43f69ad0365278bfdd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WindowService: {fileID: 1514154097865244407, guid: d48e03d24e469394a878d58c6abbc151,
+    type: 3}
 --- !u!1 &259932590
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,6 +211,7 @@ GameObject:
   - component: {fileID: 259932594}
   - component: {fileID: 259932593}
   - component: {fileID: 259932592}
+  - component: {fileID: 259932595}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -302,6 +319,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 259932590}
   m_CullTransparentMesh: 0
+--- !u!114 &259932595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259932590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc21f24cad6d94743839edbb830548e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Button: {fileID: 259932592}
+  TypeId: 1
 --- !u!1 &400996186
 GameObject:
   m_ObjectHideFlags: 0
