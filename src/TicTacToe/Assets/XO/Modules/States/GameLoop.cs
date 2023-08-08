@@ -2,7 +2,7 @@ using XO.Modules.Machine;
 
 namespace XO.Modules.States
 {
-  public class GameState : IState
+  public class GameLoop : IState
   {
     public void Enter()
     {
