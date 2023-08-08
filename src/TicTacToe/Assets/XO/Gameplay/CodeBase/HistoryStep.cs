@@ -1,6 +1,6 @@
 namespace XO.Gameplay.CodeBase
 {
-  internal class HistoryStep
+  public class HistoryStep
   {
     private readonly GameState _state;
     private readonly Symbol _symbol;

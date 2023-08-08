@@ -18,7 +18,7 @@
       _activePlayer.Enter();
     }
 
-    private void Move(Cell cell)
+    public void Move(Cell cell)
     {
       if (!_game.TryMove(_activePlayer, cell))
         return;

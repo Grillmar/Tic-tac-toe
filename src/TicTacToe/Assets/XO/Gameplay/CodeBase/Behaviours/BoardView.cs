@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using XO.Modules.States;
-using Zenject;
 
 namespace XO.Gameplay.CodeBase.Behaviours
 {
@@ -10,21 +9,18 @@ namespace XO.Gameplay.CodeBase.Behaviours
     private GameLoop _gameLoop;
 
     public List<CellView> CellViews;
-
-    [Inject]
-    public void SetDependency(GameLoop gameLoop) => 
-      _gameLoop = gameLoop;
     
-    private void Awake()
+    private void Start()
     {
-      int index = 0;
+      InitializeCells();
+    }
+
+    private void InitializeCells()
+    {
+      var index = 0;
       for (var row = 0; row < Board.Size; row++)
-      {
-        for (var column = 0; column < Board.Size; column++)
-        {
-          CellViews[index++].Initialize(row, column);
-        }
-      }
+      for (var column = 0; column < Board.Size; column++)
+        CellViews[index++].Initialize(new Cell(row, column));
     }
   }
 }

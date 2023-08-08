@@ -1,9 +1,8 @@
 using System;
-using XO.Extensions;
 
 namespace XO.Gameplay.CodeBase
 {
-  class RealPlayer : IPlayer
+  public class RealPlayer : IPlayer
   {
     private readonly Game _game;
     public event Action<Cell> OnMadeMove;
@@ -15,10 +14,8 @@ namespace XO.Gameplay.CodeBase
       Symbol = symbol;
     }
 
-    public void Enter() => 
-      OnMadeMove
-        ?.Invoke(_game
-          .GetPossibleMoves()
-          .RandomElement());
+    public void Enter()
+    {
+    }
   }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace XO.Gameplay.CodeBase
 {
-  internal class Board
+  public class Board
   {
     public const int Size = 3;
     
