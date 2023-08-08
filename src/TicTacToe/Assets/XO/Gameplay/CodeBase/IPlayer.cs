@@ -1,6 +1,6 @@
 using System;
 
-namespace XO.Game.CodeBase
+namespace XO.Gameplay.CodeBase
 {
   public interface IPlayer
   {

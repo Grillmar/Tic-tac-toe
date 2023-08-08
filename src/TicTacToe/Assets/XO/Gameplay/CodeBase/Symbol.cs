@@ -1,4 +1,4 @@
-namespace XO.Game.CodeBase
+namespace XO.Gameplay.CodeBase
 {
   public enum Symbol
   {

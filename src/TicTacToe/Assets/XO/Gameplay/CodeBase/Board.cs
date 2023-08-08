@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace XO.Game.CodeBase
+namespace XO.Gameplay.CodeBase
 {
   internal class Board
   {

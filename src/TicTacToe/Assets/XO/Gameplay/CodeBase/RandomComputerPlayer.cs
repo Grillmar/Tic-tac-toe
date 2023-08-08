@@ -1,6 +1,4 @@
-using System;
-
-namespace XO.Game.CodeBase
+namespace XO.Gameplay.CodeBase
 {
   // class RandomComputerPlayer : IPlayer
   // {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace XO.Game.CodeBase
+namespace XO.Gameplay.CodeBase
 {
   public class Game
   {

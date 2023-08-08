@@ -1,7 +1,7 @@
 using System;
 using XO.Extensions;
 
-namespace XO.Game.CodeBase
+namespace XO.Gameplay.CodeBase
 {
   class RealPlayer : IPlayer
   {
