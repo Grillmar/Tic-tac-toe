@@ -2,8 +2,8 @@ namespace XO.Game.CodeBase
 {
   public class Cell
   {
-    public int Row;
-    public int Column;
+    public readonly int Row;
+    public readonly int Column;
 
     public Cell(int row, int column)
     {

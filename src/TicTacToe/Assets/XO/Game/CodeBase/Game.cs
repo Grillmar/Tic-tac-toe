@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace XO.Game.CodeBase
@@ -11,10 +10,18 @@ namespace XO.Game.CodeBase
     private readonly Stack<HistoryStep> _history;
     private readonly IPlayer _firstPlayer;
     private readonly IPlayer _secondPlayer;
+
+    public Game()
+    {
+      _board = new Board();
+      _history = new Stack<HistoryStep>();
+
+      _state = GameState.FirstPlayerMove;
+    }
     
     public void Move(IPlayer player, Cell cell)
     {
-      if (_board[cell.Row, cell.Column] != null)
+      if (IsFree(cell))
       {
         Debug.Log("The chosen cell is not empty.");
         return;
@@ -59,6 +66,9 @@ namespace XO.Game.CodeBase
 
     private bool IsDraw() => 
       _board.GetEmptyCells().Count == 0;
+
+    private bool IsFree(Cell cell) => 
+      _board[cell.Row, cell.Column] != null;
 
     private bool IsGameFinish() =>
       _state == GameState.FirstPlayerVictory ||

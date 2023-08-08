@@ -1,11 +1,11 @@
 namespace XO.Game.CodeBase
 {
-  internal enum GameState
+  public enum GameState
   {
-    FirstPlayerMove,
-    SecondPlayerMove,
-    FirstPlayerVictory,
-    SecondPlayerVictory,
-    Draw
+    FirstPlayerMove = 0,
+    SecondPlayerMove = 1,
+    FirstPlayerVictory = 2,
+    SecondPlayerVictory = 3,
+    Draw = 4
   }
 }
