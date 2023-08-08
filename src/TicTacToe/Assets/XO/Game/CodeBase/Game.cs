@@ -8,8 +8,6 @@ namespace XO.Game.CodeBase
     private GameState _state;
     private readonly Board _board;
     private readonly Stack<HistoryStep> _history;
-    private readonly IPlayer _firstPlayer;
-    private readonly IPlayer _secondPlayer;
 
     public Game()
     {
@@ -19,24 +17,51 @@ namespace XO.Game.CodeBase
       _state = GameState.FirstPlayerMove;
     }
     
-    public void Move(IPlayer player, Cell cell)
+    public IList<Cell> GetPossibleMoves() => 
+      IsGameFinish() 
+        ? new List<Cell>() 
+        : _board.GetEmptyCells();
+
+    public bool TryMove(IPlayer player, Cell cell)
     {
+      if (IsCorrectPlayerMove(player))
+      {
+        Debug.Log("The turn belongs to another player.");
+        return false;
+      }
+
       if (IsFree(cell))
       {
         Debug.Log("The chosen cell is not empty.");
-        return;
+        return false;
       }
 
       if (IsGameFinish())
       {
         Debug.Log("The game was ended.");
-        return;
+        return false;
       }
 
       _history.Push(new HistoryStep(_state, player.Symbol, cell));
 
       _board[cell.Row, cell.Column] = player.Symbol;
       _state = GetState(cell, player.Symbol);
+
+      return true;
+    }
+
+    public void Undo()
+    {
+      if (_history.Count == 0)
+      {
+        Debug.Log("The history is empty.");
+      }
+
+      (GameState previousState, _, Cell cell) = _history.Pop();
+
+      _state = previousState;
+      
+      _board[cell.Row, cell.Column] = null;
     }
 
     private GameState GetState(Cell cell, Symbol symbol)
@@ -63,6 +88,10 @@ namespace XO.Game.CodeBase
       
       return GameState.FirstPlayerMove;
     }
+
+    private bool IsCorrectPlayerMove(IPlayer player) =>
+      (_state == GameState.FirstPlayerMove && player.Symbol != Symbol.X) ||
+      (_state == GameState.SecondPlayerMove && player.Symbol != Symbol.O);
 
     private bool IsDraw() => 
       _board.GetEmptyCells().Count == 0;
