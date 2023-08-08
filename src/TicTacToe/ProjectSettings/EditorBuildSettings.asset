@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/XO/Main/MainScene.unity
     guid: 73f7801ebdcafc4418736b1c233a0809
   - enabled: 1
-    path: Assets/XO/Game/GameScene.unity
+    path: Assets/XO/Gameplay/GameScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
