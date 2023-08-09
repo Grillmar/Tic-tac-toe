@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine.UI;
 using XO.Extensions;
-using XO.Gameplay.CodeBase;
 using XO.Modules.Data;
 using XO.Modules.Machine;
 using XO.Modules.States;
@@ -11,6 +11,8 @@ namespace XO.Window.Windows.Start
 {
   public class StartWindow : BaseWindow
   {
+    public TMP_Dropdown Difficult;
+    
     public Button PlayerVsComputer;
     public Button PlayerVsPlayer;
     public Button ComputerVsComputer;
@@ -20,6 +22,8 @@ namespace XO.Window.Windows.Start
     private StateMachine _stateMachine;
     private IWindowService _windowService;
     private GameData _gameData;
+
+    private Player _difficult;
 
     [Inject]
     public void SetDependency(StateMachine stateMachine, IWindowService windowService, GameData gameData)
@@ -36,17 +40,28 @@ namespace XO.Window.Windows.Start
       PlayerVsComputer.onClick.AddListener(PlayerVsComputerConfigure);
       PlayerVsPlayer.onClick.AddListener(PlayerVsPlayerConfigure);
       ComputerVsComputer.onClick.AddListener(ComputerVsComputerConfigure);
+      
+      Difficult.onValueChanged.AddListener(ChangeDifficult);
     }
 
     private void OnDestroy()
     {
       Back.onClick.RemoveListener(CloseWindow);
       
-      PlayerVsComputer.onClick.RemoveListener(MoveToFight);
-      PlayerVsPlayer.onClick.RemoveListener(MoveToFight);
-      ComputerVsComputer.onClick.RemoveListener(MoveToFight);
+      PlayerVsComputer.onClick.RemoveListener(PlayerVsComputerConfigure);
+      PlayerVsPlayer.onClick.RemoveListener(PlayerVsPlayerConfigure);
+      ComputerVsComputer.onClick.RemoveListener(ComputerVsComputerConfigure);
+      
+      Difficult.onValueChanged.RemoveListener(ChangeDifficult);
     }
+    private void CloseWindow() => 
+      _windowService.Close(TypeId);
 
+    private void MoveToFight()
+    {
+      _stateMachine.Enter<LoadGameState>();
+      _windowService.Close(TypeId);
+    }
     private void PlayerVsComputerConfigure()
     {
       _gameData.Players = new List<Player>
@@ -54,6 +69,7 @@ namespace XO.Window.Windows.Start
         Player.RealPlayer,
         GetComputer()
       };
+      _gameData.Players.Shuffle();
       MoveToFight();
     }
 
@@ -76,21 +92,13 @@ namespace XO.Window.Windows.Start
       };
       MoveToFight();
     }
-    
-    private void CloseWindow() => 
-      _windowService.Close(TypeId);
 
-    private void MoveToFight()
-    {
-      _stateMachine.Enter<LoadGameState>();
-      _windowService.Close(TypeId);
-    }
+    private Player GetComputer() => 
+      _difficult;
 
-    private Player GetComputer()
-    {
-      return Player.EasyComputer;
-    }
-    
+    private void ChangeDifficult(int difficult) => 
+      _difficult = (Player)difficult;
+
     private Player GetRandomComputer() => 
       new[] { Player.EasyComputer, Player.NormalComputer, Player.HardComputer }
         .RandomElement();

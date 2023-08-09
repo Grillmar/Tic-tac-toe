@@ -2,9 +2,9 @@
 {
   public enum Player
   {
-    RealPlayer,
     EasyComputer,
     NormalComputer,
-    HardComputer
+    HardComputer,
+    RealPlayer,
   }
 }
