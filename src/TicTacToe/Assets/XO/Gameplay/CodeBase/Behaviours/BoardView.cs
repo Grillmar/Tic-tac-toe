@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using XO.Extensions;
 using Zenject;
 
 namespace XO.Gameplay.CodeBase.Behaviours
@@ -27,24 +25,26 @@ namespace XO.Gameplay.CodeBase.Behaviours
       _game.UpdateView += TryUpdateView;
     }
 
-    private void TryUpdateView(Cell cell, Symbol? symbol) => 
-      UpdateView(_cellViews[(cell.Row, cell.Column)].View, symbol);
+    private void OnDestroy()
+    {
+      _game.UpdateView -= TryUpdateView;
+    }
 
-    private void UpdateView(Image view, Symbol? symbol)
+    private void TryUpdateView(Cell cell, Symbol? symbol) => 
+      UpdateView(_cellViews[(cell.Row, cell.Column)], symbol);
+
+    private void UpdateView(CellView view, Symbol? symbol)
     {
       switch (symbol)
       {
         case Symbol.X:
-          view.sprite = X;
-          view.Alpha(1);
+          view.UpdateSprite(X, 1);
           break;
         case Symbol.O:
-          view.sprite = O;
-          view.Alpha(1);
+          view.UpdateSprite(O, 1);
           break;
         default:
-          view.sprite = null;
-          view.Alpha(0);
+          view.UpdateSprite(null, 0);
           break;
       }
     }

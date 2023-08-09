@@ -1,8 +1,7 @@
-﻿using XO.Gameplay.CodeBase;
-using XO.Gameplay.CodeBase.Behaviours;
+﻿using XO.Gameplay.CodeBase.Behaviours;
 using Zenject;
 
-namespace XO.Bootstrap
+namespace XO.Gameplay.CodeBase
 {
   public class GameplayInstaller : MonoInstaller
   {

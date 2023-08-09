@@ -20,7 +20,7 @@ namespace XO.Gameplay.CodeBase.Behaviours
       _game.UpdateState += CheckEndGame;
 
     public void Dispose() => 
-      _game.UpdateState += CheckEndGame;
+      _game.UpdateState -= CheckEndGame;
 
     private void CheckEndGame(GameState state)
     {

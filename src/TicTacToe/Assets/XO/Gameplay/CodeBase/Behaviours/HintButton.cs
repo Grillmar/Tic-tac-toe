@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using XO.Extensions;
-using XO.Modules.States;
 using Zenject;
 
 namespace XO.Gameplay.CodeBase.Behaviours
@@ -38,6 +37,7 @@ namespace XO.Gameplay.CodeBase.Behaviours
     public void OnDestroy()
     {
       Button.onClick.RemoveListener(Hint);
+      _game.UpdateState -= StopBlinking;
     }
 
     private void Hint()
