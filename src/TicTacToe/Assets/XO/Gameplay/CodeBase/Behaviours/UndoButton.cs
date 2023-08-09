@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using XO.Modules.Machine;
 using XO.Modules.States;
 using Zenject;
 
