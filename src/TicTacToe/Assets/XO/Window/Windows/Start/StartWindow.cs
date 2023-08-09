@@ -1,4 +1,7 @@
-﻿using UnityEngine.UI;
+﻿using System.Collections.Generic;
+using UnityEngine.UI;
+using XO.Gameplay.CodeBase;
+using XO.Modules.Data;
 using XO.Modules.Machine;
 using XO.Modules.States;
 using Zenject;
@@ -15,21 +18,23 @@ namespace XO.Window.Windows.Start
 
     private StateMachine _stateMachine;
     private IWindowService _windowService;
+    private GameData _gameData;
 
     [Inject]
-    public void SetDependency(StateMachine stateMachine, IWindowService windowService)
+    public void SetDependency(StateMachine stateMachine, IWindowService windowService, GameData gameData)
     {
       _stateMachine = stateMachine;
       _windowService = windowService;
+      _gameData = gameData;
     }
     
     private void Awake()
     {
       Back.onClick.AddListener(CloseWindow);
       
-      PlayerVsComputer.onClick.AddListener(MoveToFight);
-      PlayerVsPlayer.onClick.AddListener(MoveToFight);
-      ComputerVsComputer.onClick.AddListener(MoveToFight);
+      PlayerVsComputer.onClick.AddListener(PlayerVsComputerConfigure);
+      PlayerVsPlayer.onClick.AddListener(PlayerVsPlayerConfigure);
+      ComputerVsComputer.onClick.AddListener(ComputerVsComputerConfigure);
     }
 
     private void OnDestroy()
@@ -39,6 +44,24 @@ namespace XO.Window.Windows.Start
       PlayerVsComputer.onClick.RemoveListener(MoveToFight);
       PlayerVsPlayer.onClick.RemoveListener(MoveToFight);
       ComputerVsComputer.onClick.RemoveListener(MoveToFight);
+    }
+
+    private void PlayerVsComputerConfigure()
+    {
+      _gameData.Players = new List<IPlayer> { new RealPlayer(), new RandomComputerPlayer() };
+      MoveToFight();
+    }
+
+    private void PlayerVsPlayerConfigure()
+    {
+      _gameData.Players = new List<IPlayer> { new RealPlayer(), new RealPlayer() };
+      MoveToFight();
+    }
+
+    private void ComputerVsComputerConfigure()
+    {
+      _gameData.Players = new List<IPlayer> { new RandomComputerPlayer(), new RandomComputerPlayer() };
+      MoveToFight();
     }
 
     private void CloseWindow() => 

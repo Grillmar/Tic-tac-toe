@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using XO.Extensions;
+using XO.Modules.States;
+using Zenject;
 
 namespace XO.Gameplay.CodeBase
 {
   public class RandomComputerPlayer : IPlayer
   {
-    private readonly Game _game;
-    public event Action<Cell> OnMadeMove;
-    public Symbol Symbol { get; }
+    public Symbol Symbol { get; private set; }
+    
+    private Game _game;
+    private GameLoop _gameLoop;
 
-    public RandomComputerPlayer(Game game, Symbol symbol)
+    [Inject]
+    public void SetDependency(GameLoop gameLoop) => 
+      _gameLoop = gameLoop;
+    
+    public void Initialize(Game game, Symbol symbol)
     {
       _game = game;
       Symbol = symbol;
@@ -30,7 +37,7 @@ namespace XO.Gameplay.CodeBase
       if (!possibleMoves.Any())
         return;
 
-      OnMadeMove?.Invoke(possibleMoves.RandomElement());
+      _gameLoop.PlayersController.Move(possibleMoves.RandomElement());
     }
   }
 }

@@ -1,4 +1,6 @@
-﻿namespace XO.Gameplay.CodeBase
+﻿using XO.Modules.Data;
+
+namespace XO.Gameplay.CodeBase
 {
   public class PlayersController
   {
@@ -7,15 +9,17 @@
     private  IPlayer _nextPlayer;
     private  IPlayer _activePlayer;
 
-    public PlayersController(Game game)
+    public PlayersController(Game game, GameData gameData)
     {
       _game = game;
       _game.UpdateState += ChangePlayer;
+
+      _activePlayer = gameData.Players[0];
+      _activePlayer.Initialize(_game, Symbol.X);
       
-      _activePlayer = new RandomComputerPlayer(_game, Symbol.X);
-      _nextPlayer = new RandomComputerPlayer(_game, Symbol.O);
+      _nextPlayer = gameData.Players[1];
+      _nextPlayer.Initialize(_game, Symbol.O);
       
-      _activePlayer.OnMadeMove += Move;
       _activePlayer.Enter();
     }
 
@@ -27,10 +31,7 @@
 
     private void RollPlayer()
     {
-      _activePlayer.OnMadeMove -= Move;
       (_activePlayer, _nextPlayer) = (_nextPlayer, _activePlayer);
-
-      _activePlayer.OnMadeMove += Move;
       _activePlayer.Enter();
     }
   }
