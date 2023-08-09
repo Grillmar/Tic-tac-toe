@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using XO.Modules.States;
 
 namespace XO.Gameplay.CodeBase.Behaviours
 {
   public class BoardView : MonoBehaviour
   {
-    private GameLoop _gameLoop;
-
     public List<CellView> CellViews;
     
     private void Start()

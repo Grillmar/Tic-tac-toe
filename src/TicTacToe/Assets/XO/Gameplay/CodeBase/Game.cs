@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace XO.Gameplay.CodeBase
 {
   public class Game
   {
+    public event Action<GameState> UpdateState; 
+    public event Action<Cell, Symbol> UpdateView; 
+
     private GameState _state;
     private readonly Board _board;
     private readonly Stack<HistoryStep> _history;
@@ -30,7 +34,7 @@ namespace XO.Gameplay.CodeBase
         return false;
       }
 
-      if (IsFree(cell))
+      if (!IsEmpty(cell))
       {
         Debug.Log("The chosen cell is not empty.");
         return false;
@@ -46,7 +50,10 @@ namespace XO.Gameplay.CodeBase
 
       _board[cell.Row, cell.Column] = player.Symbol;
       _state = GetState(cell, player.Symbol);
-
+      
+      UpdateState?.Invoke(_state);
+      UpdateView?.Invoke(cell, player.Symbol);
+      
       return true;
     }
 
@@ -96,8 +103,8 @@ namespace XO.Gameplay.CodeBase
     private bool IsDraw() => 
       _board.GetEmptyCells().Count == 0;
 
-    private bool IsFree(Cell cell) => 
-      _board[cell.Row, cell.Column] != null;
+    private bool IsEmpty(Cell cell) => 
+      _board[cell.Row, cell.Column] == null;
 
     private bool IsGameFinish() =>
       _state == GameState.FirstPlayerVictory ||
