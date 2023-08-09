@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using XO.Gameplay.CodeBase;
 
 namespace XO.Modules.Data
 {
   public class GameData
   {
-    public List<IPlayer> Players = new List<IPlayer> { new RealPlayer(), new RealPlayer() };
+    public List<Player> Players = new List<Player> { Player.RealPlayer, Player.RealPlayer };
   }
 }

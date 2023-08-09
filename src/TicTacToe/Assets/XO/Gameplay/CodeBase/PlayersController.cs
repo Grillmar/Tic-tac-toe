@@ -1,4 +1,5 @@
-﻿using XO.Modules.Data;
+﻿using System.Collections.Generic;
+using XO.Modules.Data;
 
 namespace XO.Gameplay.CodeBase
 {
@@ -9,15 +10,23 @@ namespace XO.Gameplay.CodeBase
     private  IPlayer _nextPlayer;
     private  IPlayer _activePlayer;
 
+    private readonly Dictionary<Player, IPlayer> _players = new Dictionary<Player, IPlayer>()
+    {
+      [Player.RealPlayer] = new RealPlayer(),
+      [Player.EasyComputer] = new RandomComputerPlayer(),
+      [Player.NormalComputer] = new RandomComputerPlayer(),
+      [Player.HardComputer] = new RandomComputerPlayer(),
+    };
+    
     public PlayersController(Game game, GameData gameData)
     {
       _game = game;
       _game.UpdateState += ChangePlayer;
 
-      _activePlayer = gameData.Players[0];
+      _activePlayer = _players[gameData.Players[0]];
       _activePlayer.Initialize(_game, Symbol.X, this);
       
-      _nextPlayer = gameData.Players[1];
+      _nextPlayer = _players[gameData.Players[1]];
       _nextPlayer.Initialize(_game, Symbol.O, this);
       
       _activePlayer.Enter();

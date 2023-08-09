@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.UI;
+using XO.Extensions;
 using XO.Gameplay.CodeBase;
 using XO.Modules.Data;
 using XO.Modules.Machine;
@@ -48,22 +49,34 @@ namespace XO.Window.Windows.Start
 
     private void PlayerVsComputerConfigure()
     {
-      _gameData.Players = new List<IPlayer> { new RealPlayer(), new RandomComputerPlayer() };
+      _gameData.Players = new List<Player>
+      {
+        Player.RealPlayer,
+        GetComputer()
+      };
       MoveToFight();
     }
 
     private void PlayerVsPlayerConfigure()
     {
-      _gameData.Players = new List<IPlayer> { new RealPlayer(), new RealPlayer() };
+      _gameData.Players = new List<Player>
+      {
+        Player.RealPlayer, 
+        Player.RealPlayer
+      };
       MoveToFight();
     }
 
     private void ComputerVsComputerConfigure()
     {
-      _gameData.Players = new List<IPlayer> { new RandomComputerPlayer(), new RandomComputerPlayer() };
+      _gameData.Players = new List<Player>
+      {
+        GetRandomComputer(),
+        GetRandomComputer()
+      };
       MoveToFight();
     }
-
+    
     private void CloseWindow() => 
       _windowService.Close(TypeId);
 
@@ -72,5 +85,14 @@ namespace XO.Window.Windows.Start
       _stateMachine.Enter<LoadGameState>();
       _windowService.Close(TypeId);
     }
+
+    private Player GetComputer()
+    {
+      return Player.EasyComputer;
+    }
+    
+    private Player GetRandomComputer() => 
+      new[] { Player.EasyComputer, Player.NormalComputer, Player.HardComputer }
+        .RandomElement();
   }
 }
