@@ -19,7 +19,7 @@ namespace XO.Modules.States
         [typeof(MainState)] = diContainer.Resolve<MainState>,
         [typeof(LoadMainState)] = diContainer.Resolve<LoadMainState>,
         [typeof(LoadGameState)] = diContainer.Resolve<LoadGameState>,
-        [typeof(GameState)] = diContainer.Resolve<GameState>,
+        [typeof(GameLoop)] = diContainer.Resolve<GameLoop>,
       };
 
     public TState GetState<TState>() where TState : class, IExitableState => 

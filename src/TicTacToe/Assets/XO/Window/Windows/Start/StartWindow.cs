@@ -1,5 +1,4 @@
-﻿using UnityEngine.Serialization;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using XO.Modules.Machine;
 using XO.Modules.States;
 using Zenject;
@@ -8,7 +7,6 @@ namespace XO.Window.Windows.Start
 {
   public class StartWindow : BaseWindow
   {
-    private const string GameScene = "GameScene";
     
     public Button PlayerVsComputer;
     public Button PlayerVsPlayer;
@@ -49,7 +47,7 @@ namespace XO.Window.Windows.Start
 
     private void MoveToFight()
     {
-      _stateMachine.Enter<LoadGameState, string>(GameScene);
+      _stateMachine.Enter<LoadGameState>();
       _windowService.Close(TypeId);
     }
   }

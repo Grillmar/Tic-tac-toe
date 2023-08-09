@@ -4,8 +4,11 @@ using XO.Modules.Machine;
 
 namespace XO.Modules.States
 {
-  public class LoadGameState : IPayloadState<string>
+  public class LoadGameState : IState
   {
+    private const string GameScene = "GameScene";
+
+    
     private readonly LoadingCurtain _loadingCurtain;
     private readonly StateMachine _stateMachine;
     private readonly ISceneLoader _sceneLoader;
@@ -17,11 +20,11 @@ namespace XO.Modules.States
       _sceneLoader = sceneLoader;
     }
 
-    public void Enter(string sceneName)
+    public void Enter()
     {
       _loadingCurtain.Show();
       
-      Load(sceneName);
+      Load();
     }
 
     public void Exit()
@@ -29,10 +32,10 @@ namespace XO.Modules.States
       _loadingCurtain.Hide();
     }
 
-    private async void Load(string sceneName)
+    private async void Load()
     {
-      await _sceneLoader.LoadScene(sceneName);
-      _stateMachine.Enter<GameState>();
+      await _sceneLoader.LoadScene(GameScene);
+      _stateMachine.Enter<GameLoop>();
     }
   }
 }
