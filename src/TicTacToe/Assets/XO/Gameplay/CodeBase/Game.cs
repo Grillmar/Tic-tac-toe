@@ -7,7 +7,7 @@ namespace XO.Gameplay.CodeBase
   public class Game
   {
     public event Action<GameState> UpdateState; 
-    public event Action<Cell, Symbol> UpdateView; 
+    public event Action<Cell, Symbol?> UpdateView; 
 
     private GameState _state;
     private readonly Board _board;
@@ -62,6 +62,7 @@ namespace XO.Gameplay.CodeBase
       if (_history.Count == 0)
       {
         Debug.Log("The history is empty.");
+        return;
       }
 
       (GameState previousState, _, Cell cell) = _history.Pop();
@@ -69,6 +70,9 @@ namespace XO.Gameplay.CodeBase
       _state = previousState;
       
       _board[cell.Row, cell.Column] = null;
+      
+      UpdateState?.Invoke(_state);
+      UpdateView?.Invoke(cell, null);
     }
 
     private GameState GetState(Cell cell, Symbol symbol)

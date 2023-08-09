@@ -39,13 +39,13 @@ namespace XO.Gameplay.CodeBase.Behaviours
     public void OnPointerClick(PointerEventData eventData) => 
       _gameLoop.PlayersController.Move(_cell);
 
-    private void TryUpdateView(Cell cell, Symbol symbol)
+    private void TryUpdateView(Cell cell, Symbol? symbol)
     {
       if (_cell.Equals(cell)) 
         UpdateView(symbol);
     }
 
-    private void UpdateView(Symbol symbol)
+    private void UpdateView(Symbol? symbol)
     {
       switch (symbol)
       {
