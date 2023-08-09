@@ -26,24 +26,24 @@ namespace XO.Gameplay.CodeBase
         ? new List<Cell>() 
         : _board.GetEmptyCells();
 
-    public bool TryMove(IPlayer player, Cell cell)
+    public void Move(IPlayer player, Cell cell)
     {
       if (IsCorrectPlayerMove(player))
       {
         Debug.Log("The turn belongs to another player.");
-        return false;
+        return;
       }
 
       if (!IsEmpty(cell))
       {
         Debug.Log("The chosen cell is not empty.");
-        return false;
+        return;
       }
 
       if (IsGameFinish())
       {
         Debug.Log("The game was ended.");
-        return false;
+        return;
       }
 
       _history.Push(new HistoryStep(_state, player.Symbol, cell));
@@ -53,8 +53,6 @@ namespace XO.Gameplay.CodeBase
       
       UpdateState?.Invoke(_state);
       UpdateView?.Invoke(cell, player.Symbol);
-      
-      return true;
     }
 
     public void Undo()

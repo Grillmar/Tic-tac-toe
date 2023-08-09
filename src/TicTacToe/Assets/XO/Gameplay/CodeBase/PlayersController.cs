@@ -25,7 +25,7 @@ namespace XO.Gameplay.CodeBase
       RollPlayer();
 
     public void Move(Cell cell) => 
-      _game.TryMove(_activePlayer, cell);
+      _game.Move(_activePlayer, cell);
 
     private void RollPlayer()
     {
