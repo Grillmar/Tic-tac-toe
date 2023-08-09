@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using XO.Extensions;
@@ -7,12 +8,12 @@ using Zenject;
 
 namespace XO.Gameplay.CodeBase.Behaviours
 {
-  public class CellView : MonoBehaviour, IPointerClickHandler
+  public class CellView : MonoBehaviour, IPointerClickHandler, IEquatable<Cell>
   {
     public Sprite X;
     public Sprite O;
+    public Image View { get; private set; }
 
-    private Image _view;
     private Cell _cell;
     private PlayersController _playersController;
     private GameLoop _gameLoop;
@@ -21,9 +22,12 @@ namespace XO.Gameplay.CodeBase.Behaviours
     public void SetDependency(GameLoop gameLoop) => 
       _gameLoop = gameLoop;
 
+    public void Initialize(Cell cell) => 
+      _cell = cell;
+
     public void Start()
     {
-      _view = GetComponent<Image>();
+      View = GetComponent<Image>();
 
       if (_gameLoop.IsInitialized)
         _gameLoop.Game.UpdateView += TryUpdateView;
@@ -31,10 +35,8 @@ namespace XO.Gameplay.CodeBase.Behaviours
         _gameLoop.OnInitialize += () => { _gameLoop.Game.UpdateView += TryUpdateView; };
     }
 
-    public void Initialize(Cell cell)
-    {
-      _cell = cell;
-    }
+    public bool Equals(Cell other) => 
+      _cell.Column == other?.Column && _cell.Row == other.Row;
 
     public void OnPointerClick(PointerEventData eventData) => 
       _gameLoop.PlayersController.Move(_cell);
@@ -50,16 +52,16 @@ namespace XO.Gameplay.CodeBase.Behaviours
       switch (symbol)
       {
         case Symbol.X:
-          _view.sprite = X;
-          _view.Alpha(1);
+          View.sprite = X;
+          View.Alpha(1);
           break;
         case Symbol.O:
-          _view.sprite = O;
-          _view.Alpha(1);
+          View.sprite = O;
+          View.Alpha(1);
           break;
         default:
-          _view.sprite = null;
-          _view.Alpha(0);
+          View.sprite = null;
+          View.Alpha(0);
           break;
       }
     }

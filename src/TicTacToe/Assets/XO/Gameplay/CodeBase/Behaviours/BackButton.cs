@@ -9,6 +9,7 @@ namespace XO.Gameplay.CodeBase.Behaviours
   public class BackButton : MonoBehaviour
   {
     public Button Button;
+    
     private StateMachine _stateMachine;
     
     [Inject]

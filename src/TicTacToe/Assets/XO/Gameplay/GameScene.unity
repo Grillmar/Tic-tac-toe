@@ -746,7 +746,6 @@ GameObject:
   m_Component:
   - component: {fileID: 272998590}
   - component: {fileID: 272998592}
-  - component: {fileID: 272998591}
   m_Layer: 5
   m_Name: Elements
   m_TagString: Untagged
@@ -782,28 +781,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &272998591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272998589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 187c80ee042f4d1baf633905906f1173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CellViews:
-  - {fileID: 134892338}
-  - {fileID: 82106944}
-  - {fileID: 5929167}
-  - {fileID: 344751023}
-  - {fileID: 68355496}
-  - {fileID: 450708586}
-  - {fileID: 552974207}
-  - {fileID: 2106449884}
-  - {fileID: 533577285}
 --- !u!114 &272998592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1007,6 +984,7 @@ GameObject:
   - component: {fileID: 495655895}
   - component: {fileID: 495655898}
   - component: {fileID: 495655897}
+  - component: {fileID: 495655899}
   - component: {fileID: 495655896}
   m_Layer: 5
   m_Name: Hint
@@ -1115,6 +1093,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 495655894}
   m_CullTransparentMesh: 0
+--- !u!114 &495655899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495655894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c796dc9ad8724c0d83c9de7f8097eded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Button: {fileID: 495655896}
+  BoardView: {fileID: 981842524}
+  blinkColor: {r: 1, g: 0, b: 0, a: 0.64705884}
+  blinkDuration: 0.5
+  blinkCount: 3
 --- !u!1 &533577281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,6 +1878,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 981842523}
+  - component: {fileID: 981842524}
   m_Layer: 5
   m_Name: Board
   m_TagString: Untagged
@@ -1911,6 +1907,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &981842524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981842522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 187c80ee042f4d1baf633905906f1173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CellViews:
+  - {fileID: 134892338}
+  - {fileID: 82106944}
+  - {fileID: 5929167}
+  - {fileID: 344751023}
+  - {fileID: 68355496}
+  - {fileID: 450708586}
+  - {fileID: 552974207}
+  - {fileID: 2106449884}
+  - {fileID: 533577285}
 --- !u!1 &1173105806
 GameObject:
   m_ObjectHideFlags: 0

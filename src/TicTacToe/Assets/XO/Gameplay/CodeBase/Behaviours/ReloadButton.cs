@@ -9,6 +9,7 @@ namespace XO.Gameplay.CodeBase.Behaviours
   public class ReloadButton : MonoBehaviour
   {
     public Button Button;
+    
     private StateMachine _stateMachine;
     
     [Inject]

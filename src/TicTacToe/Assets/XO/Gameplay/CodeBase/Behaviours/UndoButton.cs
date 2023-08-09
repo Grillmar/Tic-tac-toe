@@ -8,6 +8,7 @@ namespace XO.Gameplay.CodeBase.Behaviours
   public class UndoButton : MonoBehaviour
   {
     public Button Button;
+    
     private GameLoop _gameLoop;
     private Game _game;
 
