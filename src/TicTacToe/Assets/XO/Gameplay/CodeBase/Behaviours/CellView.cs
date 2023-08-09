@@ -29,11 +29,11 @@ namespace XO.Gameplay.CodeBase.Behaviours
     {
       View = GetComponent<Image>();
 
-      if (_gameLoop.IsInitialized)
-        _gameLoop.Game.UpdateView += TryUpdateView;
-      else
-        _gameLoop.OnInitialize += () => { _gameLoop.Game.UpdateView += TryUpdateView; };
+      _gameLoop.OnInitialize += SubscribeOnInitialize;
     }
+
+    private void OnDestroy() => 
+      _gameLoop.OnInitialize -= SubscribeOnInitialize;
 
     public bool Equals(Cell other) => 
       _cell.Column == other?.Column && _cell.Row == other.Row;
@@ -41,6 +41,9 @@ namespace XO.Gameplay.CodeBase.Behaviours
     public void OnPointerClick(PointerEventData eventData) => 
       _gameLoop.PlayersController.Move(_cell);
 
+    private void SubscribeOnInitialize() => 
+      _gameLoop.Game.UpdateView += TryUpdateView;
+    
     private void TryUpdateView(Cell cell, Symbol? symbol)
     {
       if (_cell.Equals(cell)) 

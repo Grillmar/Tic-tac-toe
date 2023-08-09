@@ -1,6 +1,8 @@
+using System;
+
 namespace XO.Gameplay.CodeBase
 {
-  public class Cell
+  public class Cell : IEquatable<Cell>
   {
     public readonly int Row;
     public readonly int Column;
@@ -10,5 +12,8 @@ namespace XO.Gameplay.CodeBase
       Row = row;
       Column = column;
     }
+
+    public bool Equals(Cell cell) => 
+      Row == cell?.Row && Column == cell.Column;
   }
 }

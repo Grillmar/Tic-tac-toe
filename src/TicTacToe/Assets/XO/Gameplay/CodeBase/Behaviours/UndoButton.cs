@@ -20,14 +20,17 @@ namespace XO.Gameplay.CodeBase.Behaviours
     {
       Button.onClick.AddListener(Undo);
       
-      if (_gameLoop.IsInitialized)
-        _game = _gameLoop.Game;
-      else
-        _gameLoop.OnInitialize += () => { _game = _gameLoop.Game; };
+      _gameLoop.OnInitialize += SubscribeOnInitialize;
     }
-    
-    private void OnDestroy() => 
+
+    private void OnDestroy()
+    {
+      _gameLoop.OnInitialize -= SubscribeOnInitialize;
       Button.onClick.RemoveListener(Undo);
+    }
+
+    private void SubscribeOnInitialize() => 
+      _game = _gameLoop.Game;
 
     private void Undo() => 
       _game.Undo();

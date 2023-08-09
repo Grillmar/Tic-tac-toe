@@ -6,12 +6,11 @@ namespace XO.Modules.States
 {
   public class GameLoop : IState
   {
-    public Action OnInitialize;
-    
-    public bool IsInitialized { get; private set; }
+    public event Action OnInitialize;
 
     public Game Game { get; private set; }
     public PlayersController PlayersController { get; private set; }
+
 
     public void Enter()
     {
@@ -19,15 +18,13 @@ namespace XO.Modules.States
       PlayersController = new PlayersController(Game);
       
       OnInitialize?.Invoke();
-      IsInitialized = true;
     }
 
     public void Exit()
     {
       Game = null;
       PlayersController = null;
-
-      IsInitialized = false;
+      OnInitialize = null;
     }
   }
 }

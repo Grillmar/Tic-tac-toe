@@ -65,13 +65,8 @@ namespace XO.Gameplay.CodeBase
 
     private bool IsDiagonalFilled(Symbol symbol)
     {
-      if (!CalculateDiagonal(MainDiagonal())) 
-        return false;
-      if (!CalculateDiagonal(InvertDiagonal())) 
-        return false;
+      return CalculateDiagonal(MainDiagonal()) || CalculateDiagonal(InvertDiagonal());
 
-      return true;
-      
       Func<int, int> MainDiagonal() => i => i;
       Func<int, int> InvertDiagonal() => i => Size - i - 1;
       

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace XO.Gameplay.CodeBase
+﻿namespace XO.Gameplay.CodeBase
 {
   public class PlayersController
   {
@@ -14,8 +12,8 @@ namespace XO.Gameplay.CodeBase
       _game = game;
       _game.UpdateState += ChangePlayer;
       
-      _activePlayer = new RealPlayer(_game, Symbol.X);
-      _nextPlayer = new RealPlayer(_game, Symbol.O);
+      _activePlayer = new RandomComputerPlayer(_game, Symbol.X);
+      _nextPlayer = new RandomComputerPlayer(_game, Symbol.O);
       
       _activePlayer.OnMadeMove += Move;
       _activePlayer.Enter();

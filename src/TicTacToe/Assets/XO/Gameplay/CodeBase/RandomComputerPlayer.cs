@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using XO.Extensions;
 
 namespace XO.Gameplay.CodeBase
@@ -15,10 +18,19 @@ namespace XO.Gameplay.CodeBase
       Symbol = symbol;
     }
 
-    public void Enter() => 
-      OnMadeMove
-        ?.Invoke(_game
-          .GetPossibleMoves()
-          .RandomElement());
+    public void Enter() =>
+      RandomMove();
+
+    private async void RandomMove()
+    {
+      await Task.Delay(1000);
+
+      IList<Cell> possibleMoves = _game.GetPossibleMoves();
+
+      if (!possibleMoves.Any())
+        return;
+
+      OnMadeMove?.Invoke(possibleMoves.RandomElement());
+    }
   }
 }

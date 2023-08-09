@@ -7,7 +7,6 @@ namespace XO.Window.Windows.Start
 {
   public class StartWindow : BaseWindow
   {
-    
     public Button PlayerVsComputer;
     public Button PlayerVsPlayer;
     public Button ComputerVsComputer;

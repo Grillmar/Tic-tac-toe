@@ -33,21 +33,20 @@ namespace XO.Gameplay.CodeBase.Behaviours
     {
       Button.onClick.AddListener(Hint);
 
-      if (_gameLoop.IsInitialized)
-      {
-        _game = _gameLoop.Game;
-        _game.UpdateState += StopBlinking;
-      }
-      else
-        _gameLoop.OnInitialize += () =>
-        {
-          _game = _gameLoop.Game; 
-          _game.UpdateState += StopBlinking;
-        };
+      _gameLoop.OnInitialize += SubscribeOnInitialize;
     }
 
-    public void OnDestroy() => 
+    private void SubscribeOnInitialize()
+    {
+      _game = _gameLoop.Game; 
+      _game.UpdateState += StopBlinking;
+    }
+
+    public void OnDestroy()
+    {
+      _gameLoop.OnInitialize -= SubscribeOnInitialize;
       Button.onClick.RemoveListener(Hint);
+    }
 
     private void Hint()
     {
