@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using XO.Modules.States;
 using Zenject;
 
 namespace XO.Gameplay.CodeBase.Behaviours
@@ -9,30 +8,19 @@ namespace XO.Gameplay.CodeBase.Behaviours
   {
     public Button Button;
     
-    private GameLoop _gameLoop;
-    private Game _game;
+    private Game _gameLoop;
 
     [Inject]
-    public void SetDependency(GameLoop gameLoop) => 
+    public void SetDependency(Game gameLoop) => 
       _gameLoop = gameLoop;
 
-    public void Start()
-    {
+    public void Start() => 
       Button.onClick.AddListener(Undo);
-      
-      _gameLoop.OnInitialize += SubscribeOnInitialize;
-    }
 
-    private void OnDestroy()
-    {
-      _gameLoop.OnInitialize -= SubscribeOnInitialize;
+    private void OnDestroy() => 
       Button.onClick.RemoveListener(Undo);
-    }
-
-    private void SubscribeOnInitialize() => 
-      _game = _gameLoop.Game;
-
+    
     private void Undo() => 
-      _game.Undo();
+      _gameLoop.Undo();
   }
 }

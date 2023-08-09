@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using XO.Extensions;
-using XO.Modules.States;
-using Zenject;
 
 namespace XO.Gameplay.CodeBase
 {
@@ -13,20 +10,20 @@ namespace XO.Gameplay.CodeBase
     public Symbol Symbol { get; private set; }
     
     private Game _game;
-    private GameLoop _gameLoop;
-
-    [Inject]
-    public void SetDependency(GameLoop gameLoop) => 
-      _gameLoop = gameLoop;
+    private PlayersController _playersController;
     
-    public void Initialize(Game game, Symbol symbol)
+    public void Initialize(Game game, Symbol symbol, PlayersController playersController)
     {
       _game = game;
       Symbol = symbol;
+      _playersController = playersController;
     }
 
     public void Enter() =>
       RandomMove();
+
+    public void Move(Cell cell) => 
+      _playersController.Move(cell);
 
     private async void RandomMove()
     {
@@ -37,7 +34,7 @@ namespace XO.Gameplay.CodeBase
       if (!possibleMoves.Any())
         return;
 
-      _gameLoop.PlayersController.Move(possibleMoves.RandomElement());
+      Move(possibleMoves.RandomElement());
     }
   }
 }

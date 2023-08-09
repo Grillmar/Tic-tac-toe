@@ -5,6 +5,6 @@ namespace XO.Modules.Data
 {
   public class GameData
   {
-    public List<IPlayer> Players = new List<IPlayer>(2);
+    public List<IPlayer> Players = new List<IPlayer> { new RealPlayer(), new RealPlayer() };
   }
 }

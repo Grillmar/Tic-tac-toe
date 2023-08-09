@@ -4,8 +4,10 @@ namespace XO.Gameplay.CodeBase
   {
     Symbol Symbol { get; }
 
-    void Initialize(Game game, Symbol symbol);
+    void Initialize(Game game, Symbol symbol, PlayersController playersController);
 
     void Enter();
+
+    void Move(Cell cell);
   }
 }

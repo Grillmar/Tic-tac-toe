@@ -15,10 +15,10 @@ namespace XO.Gameplay.CodeBase
       _game.UpdateState += ChangePlayer;
 
       _activePlayer = gameData.Players[0];
-      _activePlayer.Initialize(_game, Symbol.X);
+      _activePlayer.Initialize(_game, Symbol.X, this);
       
       _nextPlayer = gameData.Players[1];
-      _nextPlayer.Initialize(_game, Symbol.O);
+      _nextPlayer.Initialize(_game, Symbol.O, this);
       
       _activePlayer.Enter();
     }

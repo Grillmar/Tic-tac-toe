@@ -1,56 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using XO.Modules.States;
-using XO.Window;
-using XO.Window.Windows;
+using UnityEngine.UI;
+using XO.Extensions;
 using Zenject;
 
 namespace XO.Gameplay.CodeBase.Behaviours
 {
   public class BoardView : MonoBehaviour
   {
+    public Sprite X;
+    public Sprite O;
+    
     public List<CellView> CellViews;
-
-    private GameLoop _gameLoop;
-    private IWindowService _windowService;
+    public List<CellTouch> CellTouches;
+    
+    private readonly Dictionary<(int row, int column), CellView> _cellViews = new Dictionary<(int row, int column), CellView>();
+    private Game _game;
 
     [Inject]
-    public void SetDependency(GameLoop gameLoop, IWindowService windowService)
-    {
-      _gameLoop = gameLoop;
-      _windowService = windowService;
-    }
+    public void SetDependency(Game game) => 
+      _game = game;
 
     private void Start()
     {
       InitializeCells();
-
-      _gameLoop.OnInitialize += SubscribeOnInitialize;
+      _game.UpdateView += TryUpdateView;
     }
 
-    private void OnDestroy() => 
-      _gameLoop.OnInitialize -= SubscribeOnInitialize;
+    private void TryUpdateView(Cell cell, Symbol? symbol) => 
+      UpdateView(_cellViews[(cell.Row, cell.Column)].View, symbol);
 
-    private void SubscribeOnInitialize() => 
-      _gameLoop.Game.UpdateState += CheckEndGame;
-
-    private void CheckEndGame(GameState state)
+    private void UpdateView(Image view, Symbol? symbol)
     {
-
-      switch (state)
+      switch (symbol)
       {
-        case GameState.FirstPlayerVictory:
-          _windowService.Open(WindowTypeId.Win, "X");
-          _gameLoop.Game.UpdateState -= CheckEndGame;
+        case Symbol.X:
+          view.sprite = X;
+          view.Alpha(1);
           break;
-        case GameState.SecondPlayerVictory:
-          _windowService.Open(WindowTypeId.Win, "O");
-          _gameLoop.Game.UpdateState -= CheckEndGame;
+        case Symbol.O:
+          view.sprite = O;
+          view.Alpha(1);
           break;
-        case GameState.Draw:
-          _windowService.Open(WindowTypeId.Draw);
-          _gameLoop.Game.UpdateState -= CheckEndGame;
+        default:
+          view.sprite = null;
+          view.Alpha(0);
           break;
       }
     }
@@ -60,7 +54,13 @@ namespace XO.Gameplay.CodeBase.Behaviours
       var index = 0;
       for (var row = 0; row < Board.Size; row++)
       for (var column = 0; column < Board.Size; column++)
-        CellViews[index++].Initialize(new Cell(row, column));
+      {
+        var cell = new Cell(row, column);
+        var cellView = CellViews[index];
+        CellTouches[index].Initialize(cell);
+        _cellViews.Add((cell.Row, cell.Column),cellView);
+        index++;
+      }
     }
   }
 }

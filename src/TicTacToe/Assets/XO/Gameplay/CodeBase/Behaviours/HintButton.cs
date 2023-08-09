@@ -22,29 +22,21 @@ namespace XO.Gameplay.CodeBase.Behaviours
     private Color _originalColor;
     private Coroutine _blinkCoroutine;
 
-    private GameLoop _gameLoop;
+
     private Game _game;
 
     [Inject]
-    public void SetDependency(GameLoop gameLoop) =>
-      _gameLoop = gameLoop;
+    public void SetDependency(Game game) =>
+      _game = game;
 
     public void Start()
     {
       Button.onClick.AddListener(Hint);
-
-      _gameLoop.OnInitialize += SubscribeOnInitialize;
-    }
-
-    private void SubscribeOnInitialize()
-    {
-      _game = _gameLoop.Game; 
       _game.UpdateState += StopBlinking;
     }
 
     public void OnDestroy()
     {
-      _gameLoop.OnInitialize -= SubscribeOnInitialize;
       Button.onClick.RemoveListener(Hint);
     }
 
