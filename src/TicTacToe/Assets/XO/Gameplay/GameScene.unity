@@ -2070,6 +2070,7 @@ GameObject:
   - component: {fileID: 1303976663}
   - component: {fileID: 1303976666}
   - component: {fileID: 1303976665}
+  - component: {fileID: 1303976667}
   - component: {fileID: 1303976664}
   m_Layer: 5
   m_Name: Undo
@@ -2178,6 +2179,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303976662}
   m_CullTransparentMesh: 0
+--- !u!114 &1303976667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303976662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea828de71c04cc086b2d2832237b37b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Button: {fileID: 1303976664}
 --- !u!1 &1362010713
 GameObject:
   m_ObjectHideFlags: 0

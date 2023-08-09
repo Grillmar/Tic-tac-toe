@@ -7,7 +7,7 @@ namespace XO.Gameplay.CodeBase
   public class Game
   {
     public event Action<GameState> UpdateState; 
-    public event Action<Cell, Symbol> UpdateView; 
+    public event Action<Cell, Symbol?> UpdateView; 
 
     private GameState _state;
     private readonly Board _board;
@@ -26,24 +26,24 @@ namespace XO.Gameplay.CodeBase
         ? new List<Cell>() 
         : _board.GetEmptyCells();
 
-    public bool TryMove(IPlayer player, Cell cell)
+    public void Move(IPlayer player, Cell cell)
     {
       if (IsCorrectPlayerMove(player))
       {
         Debug.Log("The turn belongs to another player.");
-        return false;
+        return;
       }
 
       if (!IsEmpty(cell))
       {
         Debug.Log("The chosen cell is not empty.");
-        return false;
+        return;
       }
 
       if (IsGameFinish())
       {
         Debug.Log("The game was ended.");
-        return false;
+        return;
       }
 
       _history.Push(new HistoryStep(_state, player.Symbol, cell));
@@ -53,8 +53,6 @@ namespace XO.Gameplay.CodeBase
       
       UpdateState?.Invoke(_state);
       UpdateView?.Invoke(cell, player.Symbol);
-      
-      return true;
     }
 
     public void Undo()
@@ -62,6 +60,7 @@ namespace XO.Gameplay.CodeBase
       if (_history.Count == 0)
       {
         Debug.Log("The history is empty.");
+        return;
       }
 
       (GameState previousState, _, Cell cell) = _history.Pop();
@@ -69,6 +68,9 @@ namespace XO.Gameplay.CodeBase
       _state = previousState;
       
       _board[cell.Row, cell.Column] = null;
+      
+      UpdateState?.Invoke(_state);
+      UpdateView?.Invoke(cell, null);
     }
 
     private GameState GetState(Cell cell, Symbol symbol)

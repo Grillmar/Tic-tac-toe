@@ -1,4 +1,6 @@
-﻿namespace XO.Gameplay.CodeBase
+﻿using System;
+
+namespace XO.Gameplay.CodeBase
 {
   public class PlayersController
   {
@@ -10,6 +12,7 @@
     public PlayersController(Game game)
     {
       _game = game;
+      _game.UpdateState += ChangePlayer;
       
       _activePlayer = new RealPlayer(_game, Symbol.X);
       _nextPlayer = new RealPlayer(_game, Symbol.O);
@@ -18,11 +21,14 @@
       _activePlayer.Enter();
     }
 
-    public void Move(Cell cell)
+    private void ChangePlayer(GameState state) => 
+      RollPlayer();
+
+    public void Move(Cell cell) => 
+      _game.Move(_activePlayer, cell);
+
+    private void RollPlayer()
     {
-      if (!_game.TryMove(_activePlayer, cell))
-        return;
-      
       _activePlayer.OnMadeMove -= Move;
       (_activePlayer, _nextPlayer) = (_nextPlayer, _activePlayer);
 
