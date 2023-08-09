@@ -21,16 +21,8 @@ namespace XO.Gameplay.CodeBase
       _activePlayer.Enter();
     }
 
-    private void ChangePlayer(GameState state)
-    {
-      switch (state)
-      {
-        case GameState.FirstPlayerMove:
-        case GameState.SecondPlayerMove:
-          RollPlayer();
-          break;
-      }
-    }
+    private void ChangePlayer(GameState state) => 
+      RollPlayer();
 
     public void Move(Cell cell) => 
       _game.TryMove(_activePlayer, cell);
