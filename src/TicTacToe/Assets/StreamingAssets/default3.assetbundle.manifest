@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3889091422
+CRC: 2584690121
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9d01b61e69d0fbf0e0b53887d07f1176
+    Hash: c34f23d4a834d8c55bb061854f8a226a
   TypeTreeHash:
     serializedVersion: 2
     Hash: c90fc19e2679e5295d10bd00f33cb4c3
@@ -17,5 +17,5 @@ SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/XO/Gameplay/Textures/Reskin/X.png
 - Assets/XO/Gameplay/Textures/Reskin/O.png
-- Assets/XO/Gameplay/Textures/Reskin/Background.png
+- Assets/XO/Gameplay/Textures/Default/Background.png
 Dependencies: []

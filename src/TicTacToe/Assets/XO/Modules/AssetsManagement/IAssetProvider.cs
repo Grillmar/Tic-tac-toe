@@ -8,5 +8,6 @@ namespace XO.Modules.AssetsManagement
     bool IsBundleReady { get; }
     void LoadAssetBundle(string assetBundleName);
     Task<T> LoadAsset<T>(string name) where T : Object;
+    string[] GetAllAssetBundles();
   }
 }
