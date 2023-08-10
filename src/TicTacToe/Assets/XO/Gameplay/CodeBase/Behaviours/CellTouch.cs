@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using XO.Gameplay.CodeBase.Player;
 using Zenject;
 
 namespace XO.Gameplay.CodeBase.Behaviours

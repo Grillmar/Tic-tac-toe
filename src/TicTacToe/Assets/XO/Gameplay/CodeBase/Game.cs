@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using XO.Gameplay.CodeBase.Player;
 
 namespace XO.Gameplay.CodeBase
 {
@@ -25,6 +26,9 @@ namespace XO.Gameplay.CodeBase
       IsGameFinish() 
         ? new List<Cell>() 
         : _board.GetEmptyCells();
+    
+    public Symbol?[,] GetCells() => 
+      _board.GetCells();
 
     public void Move(IPlayer player, Cell cell)
     {

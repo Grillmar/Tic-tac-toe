@@ -1,4 +1,4 @@
-namespace XO.Gameplay.CodeBase
+namespace XO.Gameplay.CodeBase.Player
 {
   public interface IPlayer
   {
@@ -7,7 +7,5 @@ namespace XO.Gameplay.CodeBase
     void Initialize(Game game, Symbol symbol, PlayersController playersController);
 
     void Enter();
-
-    void Move(Cell cell);
   }
 }

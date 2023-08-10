@@ -29,16 +29,24 @@ namespace XO.Gameplay.CodeBase
       var result = new List<Cell>();
 
       for (var row = 0; row < Size; row++)
-      {
-        for (var column = 0; column < Size; column++)
-        {
-          if (!_data[row, column].HasValue) 
-            result.Add(new Cell(row, column));
-        }
-      }
+      for (var column = 0; column < Size; column++)
+        if (!_data[row, column].HasValue)
+          result.Add(new Cell(row, column));
 
       return result;
     }
+    
+    public Symbol?[,] GetCells()
+    {
+      var result = new Symbol?[Size,Size];
+
+      for (var row = 0; row < Size; row++)
+      for (var column = 0; column < Size; column++)
+        result[row, column] = _data[row, column];
+
+      return result;
+    }
+
 
     public bool IsWin(Cell cell, Symbol symbol) =>
       IsRowFilled(cell.Row, symbol) ||

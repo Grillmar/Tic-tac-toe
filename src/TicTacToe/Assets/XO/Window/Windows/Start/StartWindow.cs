@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine.UI;
 using XO.Extensions;
-using XO.Modules.Data;
+using XO.Gameplay.CodeBase.Player;
 using XO.Modules.Machine;
 using XO.Modules.States;
 using Zenject;
@@ -21,16 +21,16 @@ namespace XO.Window.Windows.Start
 
     private StateMachine _stateMachine;
     private IWindowService _windowService;
-    private GameData _gameData;
+    private PlayerData _playerData;
 
-    private Player _difficult;
+    private PlayerType _difficult;
 
     [Inject]
-    public void SetDependency(StateMachine stateMachine, IWindowService windowService, GameData gameData)
+    public void SetDependency(StateMachine stateMachine, IWindowService windowService, PlayerData playerData)
     {
       _stateMachine = stateMachine;
       _windowService = windowService;
-      _gameData = gameData;
+      _playerData = playerData;
     }
     
     private void Awake()
@@ -64,28 +64,28 @@ namespace XO.Window.Windows.Start
     }
     private void PlayerVsComputerConfigure()
     {
-      _gameData.Players = new List<Player>
+      _playerData.Players = new List<PlayerType>
       {
-        Player.RealPlayer,
+        PlayerType.RealPlayer,
         GetComputer()
       };
-      _gameData.Players.Shuffle();
+      _playerData.Players.Shuffle();
       MoveToFight();
     }
 
     private void PlayerVsPlayerConfigure()
     {
-      _gameData.Players = new List<Player>
+      _playerData.Players = new List<PlayerType>
       {
-        Player.RealPlayer, 
-        Player.RealPlayer
+        PlayerType.RealPlayer, 
+        PlayerType.RealPlayer
       };
       MoveToFight();
     }
 
     private void ComputerVsComputerConfigure()
     {
-      _gameData.Players = new List<Player>
+      _playerData.Players = new List<PlayerType>
       {
         GetRandomComputer(),
         GetRandomComputer()
@@ -93,14 +93,14 @@ namespace XO.Window.Windows.Start
       MoveToFight();
     }
 
-    private Player GetComputer() => 
+    private PlayerType GetComputer() => 
       _difficult;
 
     private void ChangeDifficult(int difficult) => 
-      _difficult = (Player)difficult;
+      _difficult = (PlayerType)difficult;
 
-    private Player GetRandomComputer() => 
-      new[] { Player.EasyComputer, Player.NormalComputer, Player.HardComputer }
+    private PlayerType GetRandomComputer() => 
+      new[] { PlayerType.EasyComputer, PlayerType.NormalComputer, PlayerType.HardComputer }
         .RandomElement();
   }
 }

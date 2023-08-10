@@ -1,6 +1,6 @@
-﻿namespace XO.Modules.Data
+﻿namespace XO.Gameplay.CodeBase.Player
 {
-  public enum Player
+  public enum PlayerType
   {
     EasyComputer,
     NormalComputer,

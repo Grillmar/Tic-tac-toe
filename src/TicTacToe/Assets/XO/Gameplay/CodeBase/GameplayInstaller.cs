@@ -1,4 +1,5 @@
 ﻿using XO.Gameplay.CodeBase.Behaviours;
+using XO.Gameplay.CodeBase.Player;
 using Zenject;
 
 namespace XO.Gameplay.CodeBase
