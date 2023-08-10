@@ -20,8 +20,7 @@ namespace XO.Gameplay.CodeBase.Behaviours.Buttons
     private Image _targetImage;
     private Color _originalColor;
     private Coroutine _blinkCoroutine;
-
-
+    
     private Game _game;
 
     [Inject]
@@ -49,7 +48,7 @@ namespace XO.Gameplay.CodeBase.Behaviours.Buttons
         return;
       }
       
-      CellView cellView = BoardView.CellViews.First(x=> x.Equals(cell));
+      CellView cellView = BoardView.GetCellView(cell);
 
       StartBlinking(cellView.View, blinkCount, blinkDuration, blinkColor);
     }

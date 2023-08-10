@@ -5,7 +5,7 @@ using NUnit.Framework;
 using XO.Gameplay.CodeBase;
 using XO.Gameplay.CodeBase.Player;
 
-namespace Tests
+namespace Tests.EditMode
 {
   public class TicTacToeEditTests
   {

@@ -5,7 +5,6 @@ namespace XO.Window.Windows
     None = 0,
     Start = 1,
     Settings = 2,
-    Reskin = 3,
     
     Win = 10,
     Lose = 11,

@@ -3,7 +3,8 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "TicTacToe"
+        "TicTacToe",
+        "Zenject"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -23,7 +24,8 @@
         "System.Threading.Tasks.Extensions.dll",
         "System.Xml.ReaderWriter.dll",
         "System.Xml.XmlDocument.dll",
-        "Sirenix.Serialization.dll"
+        "Sirenix.Serialization.dll",
+        "Zenject-usage.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [
