@@ -1,10 +1,9 @@
 {
     "name": "EditMode",
-    "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "SoulsCliker.Editor"
+        "TicTacToe"
     ],
     "includePlatforms": [
         "Editor"
