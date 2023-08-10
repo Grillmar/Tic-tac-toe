@@ -11,18 +11,18 @@ namespace XO.Gameplay.CodeBase.Player
 
       for (var row = 0; row < 3; row++)
       {
-        for (var col = 0; col < 3; col++)
+        for (var column = 0; column < 3; column++)
         {
-          if (board[row, col] == null)
+          if (board[row, column] == null)
           {
-            board[row, col] = otherSymbol;
-            int score = MiniMax(board, true, mySymbol, otherSymbol, int.MinValue, int.MaxValue);
-            board[row, col] = null;
+            board[row, column] = otherSymbol;
+            int score = MiniMax(board, false, mySymbol, otherSymbol, int.MinValue, int.MaxValue);
+            board[row, column] = null;
 
             if (score > bestScore)
             {
               bestScore = score;
-              bestMove = (row, col);
+              bestMove = (row, column);
             }
           }
         }
@@ -55,9 +55,9 @@ namespace XO.Gameplay.CodeBase.Player
     {
       for (var row = 0; row < 3; row++)
       {
-        for (var col = 0; col < 3; col++)
+        for (var column = 0; column < 3; column++)
         {
-          if (board[row, col] == null)
+          if (board[row, column] == null)
             return false;
         }
       }
@@ -78,13 +78,13 @@ namespace XO.Gameplay.CodeBase.Player
         var bestScore = int.MinValue;
         for (var row = 0; row < 3; row++)
         {
-          for (var col = 0; col < 3; col++)
+          for (var column = 0; column < 3; column++)
           {
-            if (board[row, col] == null)
+            if (board[row, column] == null)
             {
-              board[row, col] = computerSymbol;
+              board[row, column] = computerSymbol;
               int score = MiniMax(board, false, playerSymbol, computerSymbol, alpha, beta);
-              board[row, col] = null;
+              board[row, column] = null;
               bestScore = Math.Max(bestScore, score);
               alpha = Math.Max(alpha, bestScore);
               if (beta <= alpha)
@@ -100,13 +100,13 @@ namespace XO.Gameplay.CodeBase.Player
         var bestScore = int.MaxValue;
         for (var row = 0; row < 3; row++)
         {
-          for (var col = 0; col < 3; col++)
+          for (var column = 0; column < 3; column++)
           {
-            if (board[row, col] == null)
+            if (board[row, column] == null)
             {
-              board[row, col] = playerSymbol;
+              board[row, column] = playerSymbol;
               int score = MiniMax(board, true, playerSymbol, computerSymbol, alpha, beta);
-              board[row, col] = null;
+              board[row, column] = null;
               bestScore = Math.Min(bestScore, score);
               beta = Math.Min(beta, bestScore);
               if (beta <= alpha)
