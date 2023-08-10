@@ -10,7 +10,7 @@ namespace XO.Gameplay.CodeBase.Behaviours
     private GameData _gameData;
 
     [Inject]
-    public void SetDependency(Game game, GameData gameData)
+    public void SetDependency(GameData gameData)
     {
       _gameData = gameData;
     }

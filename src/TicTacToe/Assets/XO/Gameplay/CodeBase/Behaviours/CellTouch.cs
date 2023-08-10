@@ -14,6 +14,5 @@ namespace XO.Gameplay.CodeBase.Behaviours
 
     public void OnPointerClick(PointerEventData eventData) => 
       OnTouchCell?.Invoke(_cell);
-    
   }
 }
