@@ -4,7 +4,7 @@ namespace XO.Gameplay.CodeBase.Player
   {
     Symbol Symbol { get; }
 
-    void Initialize(Game game, Symbol symbol, PlayersController playersController);
+    void Initialize(Game game, Symbol symbol);
 
     void Enter();
   }

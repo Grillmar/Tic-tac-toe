@@ -9,14 +9,13 @@ namespace XO.Gameplay.CodeBase.Player
     public Symbol Symbol { get; private set; }
 
     private Game _game;
-    private PlayersController _playersController;
+
     private Symbol _otherSymbol;
 
-    public void Initialize(Game game, Symbol symbol, PlayersController playersController)
+    public void Initialize(Game game, Symbol symbol)
     {
       _game = game;
       Symbol = symbol;
-      _playersController = playersController;
       _otherSymbol = symbol == Symbol.X ? Symbol.O : Symbol.X;
     }
 
@@ -34,7 +33,7 @@ namespace XO.Gameplay.CodeBase.Player
 
       (int row, int column) bestMove = MinMax.FindBestMove(_game.GetCells(), Symbol, _otherSymbol);
       
-      _playersController.Move(new Cell(bestMove.row, bestMove.column));
+      _game.Move(this, new Cell(bestMove.row, bestMove.column));
     }
   }
 }

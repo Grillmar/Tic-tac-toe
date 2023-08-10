@@ -10,13 +10,11 @@ namespace XO.Gameplay.CodeBase.Player
     public Symbol Symbol { get; private set; }
     
     private Game _game;
-    private PlayersController _playersController;
     
-    public void Initialize(Game game, Symbol symbol, PlayersController playersController)
+    public void Initialize(Game game, Symbol symbol)
     {
       _game = game;
       Symbol = symbol;
-      _playersController = playersController;
     }
 
     public void Enter() =>
@@ -30,7 +28,7 @@ namespace XO.Gameplay.CodeBase.Player
 
       if (!possibleMoves.Any())
         return;
-      _playersController.Move(possibleMoves.RandomElement());
+      _game.Move(this, possibleMoves.RandomElement());
     }
   }
 }
