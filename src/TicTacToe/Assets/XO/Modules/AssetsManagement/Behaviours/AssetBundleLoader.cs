@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using XO.Modules.AssetsManagement;
+using XO.Modules.Progress;
 using Zenject;
 
 public class AssetBundleLoader : MonoBehaviour
@@ -10,10 +11,14 @@ public class AssetBundleLoader : MonoBehaviour
 
   private IAssetProvider _assetProvider;
   private string[] _assetBundleFiles;
+  private Progress _progress;
 
   [Inject]
-  public void SetDependency(IAssetProvider assetProvider) =>
+  public void SetDependency(IAssetProvider assetProvider, Progress progress)
+  {
+    _progress = progress;
     _assetProvider = assetProvider;
+  }
 
   void Start()
   {
@@ -21,7 +26,8 @@ public class AssetBundleLoader : MonoBehaviour
 
     UpdateDropdownWith(_assetBundleFiles);
 
-    _assetProvider.LoadAssetBundle(_assetBundleFiles[0]);
+    Dropdown.value = _progress.SettingsData.BundleIndex;
+    _assetProvider.LoadAssetBundle(_assetBundleFiles[_progress.SettingsData.BundleIndex]);
 
     Dropdown.onValueChanged.AddListener(ReloadAssetBundle);
   }
@@ -29,8 +35,11 @@ public class AssetBundleLoader : MonoBehaviour
   private void OnDestroy() =>
     Dropdown.onValueChanged.RemoveListener(ReloadAssetBundle);
 
-  private void ReloadAssetBundle(int index) =>
+  private void ReloadAssetBundle(int index)
+  {
+    _progress.SettingsData.BundleIndex = index;
     _assetProvider.LoadAssetBundle(_assetBundleFiles[index]);
+  }
 
   private void UpdateDropdownWith(string[] assetBundleFiles)
   {
