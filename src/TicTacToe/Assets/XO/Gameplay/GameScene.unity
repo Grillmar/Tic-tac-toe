@@ -2723,8 +2723,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1831434360}
   - component: {fileID: 1831434362}
-  - component: {fileID: 1831434363}
   - component: {fileID: 1831434361}
+  - component: {fileID: 1831434363}
   m_Layer: 5
   m_Name: Backgound
   m_TagString: Untagged
@@ -2797,11 +2797,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1831434359}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 183647b482de4ceb87e309d7cfff1588, type: 3}
+  m_Script: {fileID: 11500000, guid: cb153a55761847fba0d426c054d17b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 1831434361}
-  AssetName: Background
 --- !u!1 &1840205942
 GameObject:
   m_ObjectHideFlags: 0

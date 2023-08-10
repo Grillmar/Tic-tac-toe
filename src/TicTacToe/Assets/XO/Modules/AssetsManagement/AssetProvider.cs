@@ -69,5 +69,13 @@ namespace XO.Modules.AssetsManagement
 
       return assetBundleFiles;
     }
+    
+    public async Task<Sprite> LoadSprites(string name)
+    {
+      var texture = await LoadAsset<Texture2D>(name);
+      return texture != null 
+        ? Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f) 
+        : null;
+    }
   }
 }

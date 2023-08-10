@@ -18,15 +18,15 @@ namespace XO.Gameplay.CodeBase
       [PlayerType.HardComputer] = new HardComputer(),
     };
     
-    public PlayersController(Game game, PlayerData playerData)
+    public PlayersController(Game game, GameData gameData)
     {
       _game = game;
       _game.UpdateState += ChangePlayer;
 
-      _activePlayer = _players[playerData.Players[0]];
+      _activePlayer = _players[gameData.Players[0]];
       _activePlayer.Initialize(_game, Symbol.X, this);
       
-      _nextPlayer = _players[playerData.Players[1]];
+      _nextPlayer = _players[gameData.Players[1]];
       _nextPlayer.Initialize(_game, Symbol.O, this);
       
       _activePlayer.Enter();

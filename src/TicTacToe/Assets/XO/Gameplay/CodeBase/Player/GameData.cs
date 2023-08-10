@@ -2,8 +2,10 @@
 
 namespace XO.Gameplay.CodeBase.Player
 {
-  public class PlayerData
+  public class GameData
   {
     public List<PlayerType> Players = new List<PlayerType> { PlayerType.RealPlayer, PlayerType.RealPlayer };
+
+    public View View = new View();
   }
 }

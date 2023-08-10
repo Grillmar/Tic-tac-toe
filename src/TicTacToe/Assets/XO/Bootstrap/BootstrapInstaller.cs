@@ -16,7 +16,7 @@ namespace XO.Bootstrap
     public override void InstallBindings()
     {
       Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
-      Container.Bind<PlayerData>().AsSingle();
+      Container.Bind<GameData>().AsSingle();
       Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle();
       
       Container

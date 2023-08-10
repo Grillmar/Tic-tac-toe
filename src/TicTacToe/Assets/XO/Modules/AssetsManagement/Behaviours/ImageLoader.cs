@@ -21,12 +21,8 @@ namespace XO.Modules.AssetsManagement.Behaviours
 
     private async void UpdateImage()
     {
-      Texture2D texture = await _assetProvider.LoadAsset<Texture2D>(AssetName);
-
-      if (texture == null)
-        return;
-      
-      Image.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
+      var sprite = await _assetProvider.LoadSprites(AssetName);
+      Image.sprite = sprite ? sprite : Image.sprite;
     }
   }
 }
