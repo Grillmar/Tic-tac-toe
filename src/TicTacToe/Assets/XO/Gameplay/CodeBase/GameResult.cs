@@ -15,8 +15,6 @@ namespace XO.Gameplay.CodeBase
     private readonly IWindowService _windowService;
     private readonly CoroutineTimer _timer;
 
-    private GameState _activePlayer = GameState.FirstPlayerMove;
-
     public GameResult(Game game, IWindowService windowService, CoroutineTimer timer)
     {
       _game = game;
@@ -40,15 +38,13 @@ namespace XO.Gameplay.CodeBase
 
     private void GameOver()
     {
-      _windowService.Open(WindowTypeId.Lose, _activePlayer == GameState.FirstPlayerMove ? "X": "O");
+      _windowService.Open(WindowTypeId.Lose, _game.State == GameState.FirstPlayerMove ? "X": "O");
       _timer.StopTimer();
       Dispose();
     }
 
     private void CheckEndGame(GameState state)
     {
-      _activePlayer = state;
-      
       switch (state)
       {
         case GameState.FirstPlayerVictory:
