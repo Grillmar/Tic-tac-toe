@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-using UnityEngine;
 using XO.Gameplay.CodeBase;
 using XO.Gameplay.CodeBase.Player;
 using XO.Modules.AssetsManagement;

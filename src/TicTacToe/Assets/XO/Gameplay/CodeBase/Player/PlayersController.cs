@@ -1,6 +1,4 @@
-﻿using XO.Gameplay.CodeBase.Player;
-
-namespace XO.Gameplay.CodeBase
+﻿namespace XO.Gameplay.CodeBase.Player
 {
   public class PlayersController
   {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using XO.Gameplay.CodeBase.Player;
 
-namespace XO.Gameplay.CodeBase.Player
+namespace XO.Gameplay.CodeBase
 {
   public class GameData
   {

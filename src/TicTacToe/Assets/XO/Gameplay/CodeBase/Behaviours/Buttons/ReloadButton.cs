@@ -4,9 +4,9 @@ using XO.Modules.Machine;
 using XO.Modules.States;
 using Zenject;
 
-namespace XO.Gameplay.CodeBase.Behaviours
+namespace XO.Gameplay.CodeBase.Behaviours.Buttons
 {
-  public class BackButton : MonoBehaviour
+  public class ReloadButton : MonoBehaviour
   {
     public Button Button;
     
@@ -17,12 +17,12 @@ namespace XO.Gameplay.CodeBase.Behaviours
       _stateMachine = stateMachine;
 
     private void Start() => 
-      Button.onClick.AddListener(Back);
+      Button.onClick.AddListener(Reload);
 
     private void OnDestroy() => 
-      Button.onClick.RemoveListener(Back);
+      Button.onClick.RemoveListener(Reload);
 
-    private void Back() => 
-      _stateMachine.Enter<LoadMainState>();
+    private void Reload() => 
+      _stateMachine.Enter<LoadGameState>();
   }
 }

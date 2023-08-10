@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using XO.Extensions;
 using Zenject;
 
-namespace XO.Gameplay.CodeBase.Behaviours
+namespace XO.Gameplay.CodeBase.Behaviours.Buttons
 {
   public class HintButton : MonoBehaviour
   {

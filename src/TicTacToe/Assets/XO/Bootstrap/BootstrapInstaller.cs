@@ -1,4 +1,4 @@
-﻿using XO.Gameplay.CodeBase.Player;
+﻿using XO.Gameplay.CodeBase;
 using XO.Modules.AssetsManagement;
 using XO.Modules.Curtain;
 using XO.Modules.Loader;

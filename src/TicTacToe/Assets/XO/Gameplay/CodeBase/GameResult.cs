@@ -3,7 +3,7 @@ using XO.Window;
 using XO.Window.Windows;
 using Zenject;
 
-namespace XO.Gameplay.CodeBase.Behaviours
+namespace XO.Gameplay.CodeBase
 {
   public class GameResult : IInitializable, IDisposable
   {

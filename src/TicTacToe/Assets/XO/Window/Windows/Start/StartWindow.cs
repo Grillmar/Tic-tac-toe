@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine.UI;
 using XO.Extensions;
+using XO.Gameplay.CodeBase;
 using XO.Gameplay.CodeBase.Player;
 using XO.Modules.Machine;
 using XO.Modules.States;
