@@ -1,4 +1,5 @@
 ﻿using XO.Gameplay.CodeBase.Player;
+using XO.Modules.AssetsManagement;
 using XO.Modules.Curtain;
 using XO.Modules.Loader;
 using XO.Modules.Machine;
@@ -15,7 +16,8 @@ namespace XO.Bootstrap
     public override void InstallBindings()
     {
       Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
-      Container.Bind<PlayerData>().To<PlayerData>().AsSingle();
+      Container.Bind<GameData>().AsSingle();
+      Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle();
       
       Container
         .BindStateMachine()

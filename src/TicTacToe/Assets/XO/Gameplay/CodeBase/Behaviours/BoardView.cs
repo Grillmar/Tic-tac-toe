@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using XO.Gameplay.CodeBase.Player;
 using Zenject;
 
 namespace XO.Gameplay.CodeBase.Behaviours
@@ -8,29 +9,34 @@ namespace XO.Gameplay.CodeBase.Behaviours
   {
     public Sprite X;
     public Sprite O;
-    
+
     public List<CellView> CellViews;
     public List<CellTouch> CellTouches;
-    
+
     private readonly Dictionary<(int row, int column), CellView> _cellViews = new Dictionary<(int row, int column), CellView>();
     private Game _game;
+    private GameData _gameData;
+
 
     [Inject]
-    public void SetDependency(Game game) => 
+    public void SetDependency(Game game, GameData gameData)
+    {
       _game = game;
+      _gameData = gameData;
+    }
 
     private void Start()
     {
       InitializeCells();
+      UpdateSprites();
+      
       _game.UpdateView += TryUpdateView;
     }
 
-    private void OnDestroy()
-    {
+    private void OnDestroy() => 
       _game.UpdateView -= TryUpdateView;
-    }
 
-    private void TryUpdateView(Cell cell, Symbol? symbol) => 
+    private void TryUpdateView(Cell cell, Symbol? symbol) =>
       UpdateView(_cellViews[(cell.Row, cell.Column)], symbol);
 
     private void UpdateView(CellView view, Symbol? symbol)
@@ -49,6 +55,12 @@ namespace XO.Gameplay.CodeBase.Behaviours
       }
     }
 
+    private void UpdateSprites()
+    {
+      X = _gameData.View.X ? _gameData.View.X : X;
+      O = _gameData.View.O ? _gameData.View.O : O;
+    }
+
     private void InitializeCells()
     {
       var index = 0;
@@ -58,7 +70,7 @@ namespace XO.Gameplay.CodeBase.Behaviours
         var cell = new Cell(row, column);
         var cellView = CellViews[index];
         CellTouches[index].Initialize(cell);
-        _cellViews.Add((cell.Row, cell.Column),cellView);
+        _cellViews.Add((cell.Row, cell.Column), cellView);
         index++;
       }
     }

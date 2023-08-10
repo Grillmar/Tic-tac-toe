@@ -21,16 +21,16 @@ namespace XO.Window.Windows.Start
 
     private StateMachine _stateMachine;
     private IWindowService _windowService;
-    private PlayerData _playerData;
+    private GameData _gameData;
 
     private PlayerType _difficult;
 
     [Inject]
-    public void SetDependency(StateMachine stateMachine, IWindowService windowService, PlayerData playerData)
+    public void SetDependency(StateMachine stateMachine, IWindowService windowService, GameData gameData)
     {
       _stateMachine = stateMachine;
       _windowService = windowService;
-      _playerData = playerData;
+      _gameData = gameData;
     }
     
     private void Awake()
@@ -64,18 +64,18 @@ namespace XO.Window.Windows.Start
     }
     private void PlayerVsComputerConfigure()
     {
-      _playerData.Players = new List<PlayerType>
+      _gameData.Players = new List<PlayerType>
       {
         PlayerType.RealPlayer,
         GetComputer()
       };
-      _playerData.Players.Shuffle();
+      _gameData.Players.Shuffle();
       MoveToFight();
     }
 
     private void PlayerVsPlayerConfigure()
     {
-      _playerData.Players = new List<PlayerType>
+      _gameData.Players = new List<PlayerType>
       {
         PlayerType.RealPlayer, 
         PlayerType.RealPlayer
@@ -85,7 +85,7 @@ namespace XO.Window.Windows.Start
 
     private void ComputerVsComputerConfigure()
     {
-      _playerData.Players = new List<PlayerType>
+      _gameData.Players = new List<PlayerType>
       {
         GetRandomComputer(),
         GetRandomComputer()
