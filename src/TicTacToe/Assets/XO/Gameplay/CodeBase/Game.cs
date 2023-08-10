@@ -8,9 +8,10 @@ namespace XO.Gameplay.CodeBase
   public class Game
   {
     public event Action<GameState> UpdateState; 
-    public event Action<Cell, Symbol?> UpdateView; 
+    public event Action<Cell, Symbol?> UpdateView;
 
-    private GameState _state;
+    public GameState State { get; private set; }
+    
     private readonly Board _board;
     private readonly Stack<HistoryStep> _history;
 
@@ -19,7 +20,7 @@ namespace XO.Gameplay.CodeBase
       _board = new Board();
       _history = new Stack<HistoryStep>();
 
-      _state = GameState.FirstPlayerMove;
+      State = GameState.FirstPlayerMove;
     }
     
     public IList<Cell> GetPossibleMoves() => 
@@ -50,12 +51,12 @@ namespace XO.Gameplay.CodeBase
         return;
       }
 
-      _history.Push(new HistoryStep(_state, player.Symbol, cell));
+      _history.Push(new HistoryStep(State, player.Symbol, cell));
 
       _board[cell.Row, cell.Column] = player.Symbol;
-      _state = GetState(cell, player.Symbol);
+      State = GetState(cell, player.Symbol);
       
-      UpdateState?.Invoke(_state);
+      UpdateState?.Invoke(State);
       UpdateView?.Invoke(cell, player.Symbol);
     }
 
@@ -69,11 +70,11 @@ namespace XO.Gameplay.CodeBase
 
       (GameState previousState, _, Cell cell) = _history.Pop();
 
-      _state = previousState;
+      State = previousState;
       
       _board[cell.Row, cell.Column] = null;
       
-      UpdateState?.Invoke(_state);
+      UpdateState?.Invoke(State);
       UpdateView?.Invoke(cell, null);
     }
 
@@ -103,8 +104,8 @@ namespace XO.Gameplay.CodeBase
     }
 
     private bool IsCorrectPlayerMove(IPlayer player) =>
-      (_state == GameState.FirstPlayerMove && player.Symbol != Symbol.X) ||
-      (_state == GameState.SecondPlayerMove && player.Symbol != Symbol.O);
+      (State == GameState.FirstPlayerMove && player.Symbol != Symbol.X) ||
+      (State == GameState.SecondPlayerMove && player.Symbol != Symbol.O);
 
     private bool IsDraw() => 
       _board.GetEmptyCells().Count == 0;
@@ -113,8 +114,8 @@ namespace XO.Gameplay.CodeBase
       _board[cell.Row, cell.Column] == null;
 
     private bool IsGameFinish() =>
-      _state == GameState.FirstPlayerVictory ||
-      _state == GameState.SecondPlayerVictory ||
-      _state == GameState.Draw;
+      State == GameState.FirstPlayerVictory ||
+      State == GameState.SecondPlayerVictory ||
+      State == GameState.Draw;
   }
 }

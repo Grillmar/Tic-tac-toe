@@ -35,8 +35,11 @@ namespace XO.Gameplay.CodeBase.Behaviours
     private void OnDestroy() => 
       _game.UpdateView -= TryUpdateView;
 
+    public CellView GetCellView(Cell cell) => 
+      _cellViews[(cell.Row, cell.Column)];
+
     private void TryUpdateView(Cell cell, Symbol? symbol) =>
-      UpdateView(_cellViews[(cell.Row, cell.Column)], symbol);
+      UpdateView(GetCellView(cell), symbol);
 
     private void UpdateView(CellView view, Symbol? symbol)
     {

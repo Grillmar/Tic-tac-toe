@@ -8,11 +8,12 @@ namespace XO.Gameplay.CodeBase
 {
   public class GameResult : IInitializable, IDisposable
   {
+    private const int Time = 6;
+    private const int Interval = 1;
+
     private readonly Game _game;
     private readonly IWindowService _windowService;
     private readonly CoroutineTimer _timer;
-    private const int Time = 6;
-    private GameState _activePlayer = GameState.FirstPlayerMove;
 
     public GameResult(Game game, IWindowService windowService, CoroutineTimer timer)
     {
@@ -26,7 +27,7 @@ namespace XO.Gameplay.CodeBase
       _game.UpdateState += CheckEndGame;
       _timer.OnFinish += GameOver;
       
-      _timer.StartTimer(Time, 1);
+      _timer.StartTimer(Time, Interval);
     }
 
     public void Dispose()
@@ -37,15 +38,13 @@ namespace XO.Gameplay.CodeBase
 
     private void GameOver()
     {
-      _windowService.Open(WindowTypeId.Lose, _activePlayer == GameState.FirstPlayerMove ? "X": "O");
+      _windowService.Open(WindowTypeId.Lose, _game.State == GameState.FirstPlayerMove ? "X": "O");
       _timer.StopTimer();
       Dispose();
     }
 
     private void CheckEndGame(GameState state)
     {
-      _activePlayer = state;
-      
       switch (state)
       {
         case GameState.FirstPlayerVictory:
@@ -65,7 +64,7 @@ namespace XO.Gameplay.CodeBase
           break;
         default:
           _timer.StopTimer();
-          _timer.StartTimer(Time,1);
+          _timer.StartTimer(Time,Interval);
           break;
       }
     }
