@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace XO.Modules.AssetsManagement
 {
-  public class AssetProvider
+  public class AssetProvider : IAssetProvider
   {
     public bool IsBundleReady { get; private set; }
     

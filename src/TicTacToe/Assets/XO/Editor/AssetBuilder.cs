@@ -82,7 +82,7 @@ public class AssetBuilder : EditorWindow
   {
     var builds = new AssetBundleBuild[1];
     builds[0].assetNames = new[] { AssetDatabase.GetAssetPath(_xSprite), AssetDatabase.GetAssetPath(_oSprite), AssetDatabase.GetAssetPath(_backgroundSprite) };
-    builds[0].assetBundleName = _assetBundleName;
+    builds[0].assetBundleName = _assetBundleName + ".assetbundle";
     return builds;
   }
 }
