@@ -6,8 +6,13 @@ namespace XO.Gameplay.CodeBase.Player
 {
   public class RealPlayer : IPlayer
   {
-    private Game _game;
     public Symbol Symbol { get; private set; }
+    
+    private Game _game;
+    private readonly TouchHolder _touchHolder;
+
+    public RealPlayer(TouchHolder touchHolder) => 
+      _touchHolder = touchHolder;
 
     public void Initialize(Game game, Symbol symbol)
     {
@@ -16,7 +21,7 @@ namespace XO.Gameplay.CodeBase.Player
     }
 
     public void Enter() => 
-      CellTouch.OnTouchCell += Move;
+      _touchHolder.OnTouchCell += Move;
 
     private void Move(Cell cell)
     {
@@ -27,7 +32,7 @@ namespace XO.Gameplay.CodeBase.Player
       
       _game.Move(this, cell);
       
-      CellTouch.OnTouchCell -= Move;
+      _touchHolder.OnTouchCell -= Move;
     }
   }
 }

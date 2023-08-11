@@ -1,4 +1,5 @@
-﻿using XO.Gameplay.CodeBase.Player;
+﻿using XO.Gameplay.CodeBase.Behaviours;
+using XO.Gameplay.CodeBase.Player;
 using XO.Gameplay.CodeBase.Timer;
 using Zenject;
 
@@ -14,6 +15,8 @@ namespace XO.Gameplay.CodeBase
 
       Container.Bind<CoroutineTimer>().FromInstance(Timer).AsSingle();
       
+      Container.Bind<TouchHolder>().AsSingle();
+
       Container.Bind<RealPlayer>().AsTransient();
       Container.Bind<EasyComputer>().AsTransient();
       Container.Bind<HardComputer>().AsTransient();
