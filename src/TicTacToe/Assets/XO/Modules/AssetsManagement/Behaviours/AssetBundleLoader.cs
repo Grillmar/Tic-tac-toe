@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using TMPro;
 using UnityEngine;
+using XO.Modules.Progress;
 using Zenject;
 
 namespace XO.Modules.AssetsManagement.Behaviours
@@ -11,12 +12,12 @@ namespace XO.Modules.AssetsManagement.Behaviours
 
     private IAssetProvider _assetProvider;
     private string[] _assetBundleFiles;
-    private Progress.Progress _progress;
+    private ProgressData _progressData;
 
     [Inject]
-    public void SetDependency(IAssetProvider assetProvider, Progress.Progress progress)
+    public void SetDependency(IAssetProvider assetProvider, ProgressData progressData)
     {
-      _progress = progress;
+      _progressData = progressData;
       _assetProvider = assetProvider;
     }
 
@@ -26,8 +27,8 @@ namespace XO.Modules.AssetsManagement.Behaviours
 
       UpdateDropdownWith(_assetBundleFiles);
 
-      Dropdown.value = _progress.SettingsData.BundleIndex;
-      _assetProvider.LoadAssetBundle(_assetBundleFiles[_progress.SettingsData.BundleIndex]);
+      Dropdown.value = _progressData.SettingsData.BundleIndex;
+      _assetProvider.LoadAssetBundle(_assetBundleFiles[_progressData.SettingsData.BundleIndex]);
 
       Dropdown.onValueChanged.AddListener(ReloadAssetBundle);
     }
@@ -37,7 +38,7 @@ namespace XO.Modules.AssetsManagement.Behaviours
 
     private void ReloadAssetBundle(int index)
     {
-      _progress.SettingsData.BundleIndex = index;
+      _progressData.SettingsData.BundleIndex = index;
       _assetProvider.LoadAssetBundle(_assetBundleFiles[index]);
     }
 

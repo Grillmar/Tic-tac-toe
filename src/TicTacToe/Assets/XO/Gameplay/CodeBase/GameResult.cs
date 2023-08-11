@@ -1,7 +1,7 @@
 ﻿using System;
 using XO.Gameplay.CodeBase.Timer;
-using XO.Window;
-using XO.Window.Windows;
+using XO.Modules.Window;
+using XO.Modules.Window.Windows;
 using Zenject;
 
 namespace XO.Gameplay.CodeBase

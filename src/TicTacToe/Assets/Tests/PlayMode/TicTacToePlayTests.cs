@@ -7,15 +7,15 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-using XO.CustomYieldI;
 using XO.Gameplay.CodeBase;
 using XO.Gameplay.CodeBase.Behaviours.Buttons;
 using XO.Gameplay.CodeBase.Player;
+using XO.Modules.CustomYieldI;
 using XO.Modules.Machine;
 using XO.Modules.States;
-using XO.Window;
-using XO.Window.Windows;
-using XO.Window.Windows.End;
+using XO.Modules.Window;
+using XO.Modules.Window.Windows;
+using XO.Modules.Window.Windows.End;
 using Zenject;
 
 namespace Tests.PlayMode

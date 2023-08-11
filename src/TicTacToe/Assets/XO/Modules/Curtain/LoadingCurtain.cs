@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using XO.Extensions;
+using XO.Modules.Extensions;
 
 namespace XO.Modules.Curtain
 {

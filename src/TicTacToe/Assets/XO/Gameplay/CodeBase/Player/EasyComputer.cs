@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using XO.Extensions;
+using XO.Modules.Extensions;
 
 namespace XO.Gameplay.CodeBase.Player
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using XO.Extensions;
+using XO.Modules.Extensions;
 using Zenject;
 
 namespace XO.Modules.Progress
@@ -9,14 +9,14 @@ namespace XO.Modules.Progress
   {
     private const string SettingsKey = "Settings";
     
-    private readonly Progress _progress;
+    private readonly ProgressData _progressData;
 
-    public ReadWriteProgress(Progress progress) => 
-      _progress = progress;
+    public ReadWriteProgress(ProgressData progressData) => 
+      _progressData = progressData;
 
     public void Initialize()
     {
-      _progress.SettingsData = HasProgress() 
+      _progressData.SettingsData = HasProgress() 
         ? LoadProgress() 
         : new SettingsData();
     }
@@ -31,7 +31,7 @@ namespace XO.Modules.Progress
 
     public void SaveProgress()
     {
-      PlayerPrefs.SetString(SettingsKey, _progress.SettingsData.ToJson());
+      PlayerPrefs.SetString(SettingsKey, _progressData.SettingsData.ToJson());
       PlayerPrefs.Save();
     }
 

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
-using XO.Extensions;
+using XO.Modules.Extensions;
 
 namespace XO.Gameplay.CodeBase.Player
 {

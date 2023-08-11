@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using XO.Extensions;
+using XO.Modules.Extensions;
 using Zenject;
 
 namespace XO.Gameplay.CodeBase.Behaviours.Buttons
