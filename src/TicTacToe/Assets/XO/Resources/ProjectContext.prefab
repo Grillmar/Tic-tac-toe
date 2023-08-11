@@ -76,3 +76,4 @@ MonoBehaviour:
   LoadingCurtain: {fileID: 5604282092254435779, guid: 8558f30c65edcd54ca675f87cacb443b,
     type: 3}
   WindowsConfig: {fileID: 11400000, guid: 1410e2b45753ca64197cb94551a02ea9, type: 2}
+  Mixer: {fileID: 24100000, guid: bc6f7dab20e2c6247878deee0504bd8f, type: 2}

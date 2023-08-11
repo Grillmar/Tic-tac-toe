@@ -1,4 +1,5 @@
-﻿using XO.Gameplay.CodeBase;
+﻿using UnityEngine.Audio;
+using XO.Gameplay.CodeBase;
 using XO.Modules.AssetsManagement;
 using XO.Modules.Curtain;
 using XO.Modules.Loader;
@@ -15,6 +16,7 @@ namespace XO.Bootstrap
   {
     public LoadingCurtain LoadingCurtain;
     public WindowsConfig WindowsConfig;
+    public AudioMixer Mixer;
     public override void InstallBindings()
     {
       Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
@@ -25,7 +27,7 @@ namespace XO.Bootstrap
       
       Container.BindInterfacesTo<ReadWriteProgress>().AsSingle();
 
-      Container.Bind<AudioController>().AsSingle().NonLazy();
+      Container.Bind<AudioController>().AsSingle().WithArguments(Mixer).NonLazy();;
       
       Container.Bind<Progress>().AsSingle();
 
