@@ -19,6 +19,7 @@ namespace XO.Gameplay.CodeBase.Installer
 
       Container.Bind<RealPlayer>().AsTransient();
       Container.Bind<EasyComputer>().AsTransient();
+      Container.Bind<NormalComputer>().AsTransient();
       Container.Bind<HardComputer>().AsTransient();
 
       Container.BindInterfacesAndSelfTo<GameResult>().AsSingle();

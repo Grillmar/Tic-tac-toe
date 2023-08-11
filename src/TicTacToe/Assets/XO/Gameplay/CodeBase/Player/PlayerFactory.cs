@@ -18,7 +18,7 @@ namespace XO.Gameplay.CodeBase.Player
         case PlayerType.EasyComputer:
           return _container.Resolve<EasyComputer>();
         case PlayerType.NormalComputer:
-          return _container.Resolve<EasyComputer>();
+          return _container.Resolve<NormalComputer>();
         case PlayerType.HardComputer:
           return _container.Resolve<HardComputer>();
         case PlayerType.RealPlayer:
