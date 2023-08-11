@@ -24,7 +24,7 @@ namespace XO.Gameplay.CodeBase.Player
     {
       await Task.Delay(1000);
 
-      IList<Cell> possibleMoves = _game.GetPossibleMoves();
+      IList<(int row, int column)> possibleMoves = _game.GetPossibleMoves();
 
       if (!possibleMoves.Any())
         return;

@@ -18,24 +18,18 @@ namespace XO.Gameplay.CodeBase
       set => SetSymbol(row, column, value);
     }
 
-    private void SetSymbol(int row, int column, Symbol? value) => 
-      _data[row, column] = value;
-
-    private Symbol? GetSymbol(int row, int column) => 
-      _data[row, column];
-    
-    public List<Cell> GetEmptyCells()
+    public List<(int row, int column)> GetEmptyCells()
     {
-      var result = new List<Cell>();
+      var result = new List<(int row, int column)>();
 
       for (var row = 0; row < Size; row++)
       for (var column = 0; column < Size; column++)
         if (!_data[row, column].HasValue)
-          result.Add(new Cell(row, column));
+          result.Add((row, column));
 
       return result;
     }
-    
+
     public Symbol?[,] GetCells()
     {
       var result = new Symbol?[Size,Size];
@@ -47,10 +41,16 @@ namespace XO.Gameplay.CodeBase
       return result;
     }
 
+    private void SetSymbol(int row, int column, Symbol? value) => 
+      _data[row, column] = value;
 
-    public bool IsWin(Cell cell, Symbol symbol) =>
-      IsRowFilled(cell.Row, symbol) ||
-      IsColumnFilled(cell.Column, symbol) ||
+    private Symbol? GetSymbol(int row, int column) => 
+      _data[row, column];
+
+
+    public bool IsWin((int row, int column) cell, Symbol symbol) =>
+      IsRowFilled(cell.row, symbol) ||
+      IsColumnFilled(cell.column, symbol) ||
       IsDiagonalFilled(symbol);
 
     private bool IsColumnFilled(int column, Symbol symbol)

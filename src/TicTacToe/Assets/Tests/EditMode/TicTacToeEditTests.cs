@@ -10,13 +10,13 @@ namespace Tests.EditMode
   public class TicTacToeEditTests
   {
     [TestCaseSource(nameof(WinSequenceMoves))]
-    public void CheckPlayerWin((GameState winner, List<Cell> steps) sequenceMove)
+    public void CheckPlayerWin((GameState winner, List<(int row, int column)> steps) sequenceMove)
     {
       Game game = new Game();
       IPlayer activePlayer = Mock.Of<IPlayer>(x=> x.Symbol == Symbol.X);
       IPlayer nextPlayer = Mock.Of<IPlayer>(x=> x.Symbol == Symbol.O);
 
-      foreach (Cell step in sequenceMove.steps)  
+      foreach ((int row, int column) step in sequenceMove.steps)  
       {
         game.Move(activePlayer, step);
 
@@ -27,13 +27,13 @@ namespace Tests.EditMode
     }
     
     [TestCaseSource(nameof(LoseSequenceMoves ))]
-    public void CheckPlayerLose((GameState loser, List<Cell> steps) sequenceMove)
+    public void CheckPlayerLose((GameState loser, List<(int row, int column)> steps) sequenceMove)
     {
       Game game = new Game();
       IPlayer activePlayer = Mock.Of<IPlayer>(x=> x.Symbol == Symbol.X);
       IPlayer nextPlayer = Mock.Of<IPlayer>(x=> x.Symbol == Symbol.O);
 
-      foreach (Cell step in sequenceMove.steps)  
+      foreach ((int row, int column) step in sequenceMove.steps)  
       {
         game.Move(activePlayer, step);
 
@@ -44,13 +44,13 @@ namespace Tests.EditMode
     }
     
     [TestCaseSource(nameof(WinSequenceMoves))]
-    public void CheckPlayerDraw((GameState draw, List<Cell> steps) sequenceMove)
+    public void CheckPlayerDraw((GameState draw, List<(int row, int column)> steps) sequenceMove)
     {
       Game game = new Game();
       IPlayer activePlayer = Mock.Of<IPlayer>(x=> x.Symbol == Symbol.X);
       IPlayer nextPlayer = Mock.Of<IPlayer>(x=> x.Symbol == Symbol.O);
 
-      foreach (Cell step in sequenceMove.steps)  
+      foreach ((int row, int column) step in sequenceMove.steps)  
       {
         game.Move(activePlayer, step);
 
@@ -66,7 +66,7 @@ namespace Tests.EditMode
       Game game = new Game();
       IPlayer activePlayer = Mock.Of<IPlayer>(x=> x.Symbol == Symbol.X);
 
-      game.Move(activePlayer, new Cell(1,1));
+      game.Move(activePlayer, (1,1));
       game.Undo();
       
       game.State.Should().Be(GameState.FirstPlayerMove);
@@ -77,7 +77,7 @@ namespace Tests.EditMode
     {
       Game game = new Game();
       IPlayer activePlayer = Mock.Of<IPlayer>(x=> x.Symbol == Symbol.X);
-      Cell cell = new Cell(1,1);
+      (int row, int column) cell = (1,1);
 
       game.Move(activePlayer, cell);
       game.Undo();
@@ -85,69 +85,69 @@ namespace Tests.EditMode
       game.GetPossibleMoves().Should().Contain(cell);
     }
 
-    public static IEnumerable<(GameState winner, List<Cell> steps)> WinSequenceMoves =>
+    public static IEnumerable<(GameState winner, List<(int row, int column)> steps)> WinSequenceMoves =>
       new[]
       {
         (GameState.FirstPlayerVictory, 
-          new List<Cell>
+          new List<(int row, int column)>
           {
-            new Cell(0, 0),
-            new Cell(0, 1),
-            new Cell(1,1),
-            new Cell(0,2),
-            new Cell(2,2)
+            (0, 0),
+            (0, 1),
+            (1,1),
+            (0,2),
+            (2,2)
           }),
         (GameState.SecondPlayerVictory, 
-          new List<Cell>
+          new List<(int row, int column)>
           {
-            new Cell(2,0),
-            new Cell(0, 0),
-            new Cell(0, 1),
-            new Cell(1,1),
-            new Cell(0,2),
-            new Cell(2,2)
+            (2,0),
+            (0, 0),
+            (0, 1),
+            (1,1),
+            (0,2),
+            (2,2)
           }),
       };
     
-    public static IEnumerable<(GameState loser, List<Cell> steps)> LoseSequenceMoves =>
+    public static IEnumerable<(GameState loser, List<(int row, int column)> steps)> LoseSequenceMoves =>
       new[]
       {
         (GameState.SecondPlayerVictory, 
-          new List<Cell>
+          new List<(int row, int column)>
           {
-            new Cell(0, 0),
-            new Cell(0, 1),
-            new Cell(1,1),
-            new Cell(0,2),
-            new Cell(2,2)
+            (0, 0),
+            (0, 1),
+            (1,1),
+            (0,2),
+            (2,2)
           }),
         (GameState.FirstPlayerVictory, 
-          new List<Cell>
+          new List<(int row, int column)>
           {
-            new Cell(2,0),
-            new Cell(0, 0),
-            new Cell(0, 1),
-            new Cell(1,1),
-            new Cell(0,2),
-            new Cell(2,2)
+            (2,0),
+            (0, 0),
+            (0, 1),
+            (1,1),
+            (0,2),
+            (2,2)
           }),
       };
     
-    public static IEnumerable<(GameState loser, List<Cell> steps)> DrawSequenceMoves =>
+    public static IEnumerable<(GameState loser, List<(int row, int column)> steps)> DrawSequenceMoves =>
       new[]
       {
         (GameState.Draw, 
-          new List<Cell>
+          new List<(int row, int column)>
           {
-            new Cell(0, 0),
-            new Cell(0, 1),
-            new Cell(0,2),
-            new Cell(1,1),
-            new Cell(1,0),
-            new Cell(1,2),
-            new Cell(2,2),
-            new Cell(2,0),
-            new Cell(2,1),
+            (0, 0),
+            (0, 1),
+            (0,2),
+            (1,1),
+            (1,0),
+            (1,2),
+            (2,2),
+            (2,0),
+            (2,1),
           }),
       };
 

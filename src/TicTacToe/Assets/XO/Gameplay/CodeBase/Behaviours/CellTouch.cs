@@ -9,14 +9,14 @@ namespace XO.Gameplay.CodeBase.Behaviours
   {
     public UnityEvent OnProduce;
 
-    private Cell _cell;
+    private (int row, int column) _cell;
     private TouchHolder _touchHolder;
 
     [Inject]
     public void SetDependency(TouchHolder touchHolder) => 
       _touchHolder = touchHolder;
 
-    public void Initialize(Cell cell) => 
+    public void Initialize((int row, int column) cell) => 
       _cell = cell;
 
     public void OnPointerClick(PointerEventData eventData)

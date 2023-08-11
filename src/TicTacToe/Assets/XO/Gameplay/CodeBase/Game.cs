@@ -8,7 +8,7 @@ namespace XO.Gameplay.CodeBase
   public class Game
   {
     public event Action<GameState> UpdateState; 
-    public event Action<Cell, Symbol?> UpdateView;
+    public event Action<(int row, int column), Symbol?> UpdateView;
 
     public GameState State { get; private set; }
     
@@ -23,15 +23,15 @@ namespace XO.Gameplay.CodeBase
       State = GameState.FirstPlayerMove;
     }
     
-    public IList<Cell> GetPossibleMoves() => 
+    public IList<(int row, int column)> GetPossibleMoves() => 
       IsGameFinish() 
-        ? new List<Cell>() 
+        ? new List<(int row, int column)>() 
         : _board.GetEmptyCells();
     
     public Symbol?[,] GetCells() => 
       _board.GetCells();
 
-    public void Move(IPlayer player, Cell cell)
+    public void Move(IPlayer player, (int row, int column) cell)
     {
       if (IsCorrectPlayerMove(player))
       {
@@ -51,9 +51,9 @@ namespace XO.Gameplay.CodeBase
         return;
       }
 
-      _history.Push(new HistoryStep(State, player.Symbol, cell));
+      _history.Push(new HistoryStep(State, cell));
 
-      _board[cell.Row, cell.Column] = player.Symbol;
+      _board[cell.row, cell.column] = player.Symbol;
       State = GetState(cell, player.Symbol);
       
       UpdateState?.Invoke(State);
@@ -74,17 +74,17 @@ namespace XO.Gameplay.CodeBase
         return;
       }
 
-      (GameState previousState, _, Cell cell) = _history.Pop();
+      (GameState previousState, (int row, int column) cell) = _history.Pop();
 
       State = previousState;
       
-      _board[cell.Row, cell.Column] = null;
+      _board[cell.row, cell.column] = null;
       
       UpdateState?.Invoke(State);
       UpdateView?.Invoke(cell, null);
     }
 
-    private GameState GetState(Cell cell, Symbol symbol)
+    private GameState GetState((int row, int column) cell, Symbol symbol)
     {
       if (_board.IsWin(cell, symbol))
         switch (symbol)
@@ -116,8 +116,8 @@ namespace XO.Gameplay.CodeBase
     private bool IsDraw() => 
       _board.GetEmptyCells().Count == 0;
 
-    private bool IsEmpty(Cell cell) => 
-      _board[cell.Row, cell.Column] == null;
+    private bool IsEmpty((int row, int column) cell) => 
+      _board[cell.row, cell.column] == null;
 
     private bool IsGameFinish() =>
       State == GameState.FirstPlayerVictory ||

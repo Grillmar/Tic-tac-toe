@@ -23,9 +23,9 @@ namespace XO.Gameplay.CodeBase.Player
     public void Enter() => 
       _touchHolder.OnTouchCell += Move;
 
-    private void Move(Cell cell)
+    private void Move((int row, int column) cell)
     {
-      IList<Cell> possibleMoves = _game.GetPossibleMoves();
+      IList<(int row, int column)> possibleMoves = _game.GetPossibleMoves();
 
       if (!possibleMoves.Any(x=>x.Equals(cell)))
         return;

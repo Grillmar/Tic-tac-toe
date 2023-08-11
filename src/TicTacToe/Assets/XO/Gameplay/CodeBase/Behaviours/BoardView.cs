@@ -35,10 +35,10 @@ namespace XO.Gameplay.CodeBase.Behaviours
     private void OnDestroy() => 
       _game.UpdateView -= TryUpdateView;
 
-    public CellView GetCellView(Cell cell) => 
-      _cellViews[(cell.Row, cell.Column)];
+    public CellView GetCellView((int row, int column) cell) => 
+      _cellViews[cell];
 
-    private void TryUpdateView(Cell cell, Symbol? symbol) =>
+    private void TryUpdateView((int row, int column) cell, Symbol? symbol) =>
       UpdateView(GetCellView(cell), symbol);
 
     private void UpdateView(CellView view, Symbol? symbol)
@@ -69,10 +69,10 @@ namespace XO.Gameplay.CodeBase.Behaviours
       for (var row = 0; row < Board.Size; row++)
       for (var column = 0; column < Board.Size; column++)
       {
-        var cell = new Cell(row, column);
+        var cell = (row, column);
         var cellView = CellViews[index];
         CellTouches[index].Initialize(cell);
-        _cellViews.Add((cell.Row, cell.Column), cellView);
+        _cellViews.Add((cell), cellView);
         index++;
       }
     }

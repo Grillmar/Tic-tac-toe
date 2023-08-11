@@ -41,14 +41,14 @@ namespace XO.Gameplay.CodeBase.Behaviours.Buttons
 
     private void Hint()
     {
-      Cell cell = GetRandomCell();
+      (int row, int column)? cell = GetRandomCell();
       if (cell == null)
       {
         Debug.Log("Nothing to hint.");
         return;
       }
       
-      CellView cellView = BoardView.GetCellView(cell);
+      CellView cellView = BoardView.GetCellView(cell.Value);
 
       StartBlinking(cellView.View, blinkCount, blinkDuration, blinkColor);
     }
@@ -91,13 +91,13 @@ namespace XO.Gameplay.CodeBase.Behaviours.Buttons
       _blinkCoroutine = null;
     }
 
-    private Cell GetRandomCell()
+    private (int row, int column)? GetRandomCell()
     {
-      IList<Cell> possibleMoves = _game.GetPossibleMoves();
+      IList<(int row, int column)> possibleMoves = _game.GetPossibleMoves();
       if (!possibleMoves.Any())
         return null;
 
-      Cell randomElement = possibleMoves.RandomElement();
+      (int row, int column) randomElement = possibleMoves.RandomElement();
       return randomElement;
     }
   }

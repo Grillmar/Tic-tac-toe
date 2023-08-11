@@ -18,7 +18,7 @@ namespace XO.Gameplay.CodeBase.Player
     {
       _game = game;
       Symbol = symbol;
-      _otherSymbol = symbol == Symbol.X ? Symbol.O : Symbol.X;
+      _otherSymbol = GetEnemySymbol(symbol);
     }
 
     public void Enter() =>
@@ -28,21 +28,21 @@ namespace XO.Gameplay.CodeBase.Player
     {
       await Task.Delay(1000);
 
-      IList<Cell> possibleMoves = _game.GetPossibleMoves();
+      IList<(int row, int column)> possibleMoves = _game.GetPossibleMoves();
 
       if (!possibleMoves.Any())
         return;
-      
 
-      if (Random.value < 0.5f)
-        _game.Move(this, possibleMoves.RandomElement());
-      else
-      {
-        (int row, int column) bestMove = MinMax.FindBestMove(_game.GetCells(), Symbol, _otherSymbol);
+      (int row, int column) bestMove = Random.value < 0.5f 
+        ? possibleMoves.RandomElement() 
+        : MinMax.FindBestMove(_game.GetCells(), Symbol, _otherSymbol);
       
-        _game.Move(this, new Cell(bestMove.row, bestMove.column));
-      }
-      
+      _game.Move(this,bestMove);
     }
+    
+    private static Symbol GetEnemySymbol(Symbol symbol) => 
+      symbol == Symbol.X 
+        ? Symbol.O 
+        : Symbol.X;
   }
 }

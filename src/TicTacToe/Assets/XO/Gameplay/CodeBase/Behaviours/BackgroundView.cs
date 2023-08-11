@@ -10,10 +10,8 @@ namespace XO.Gameplay.CodeBase.Behaviours
     private GameData _gameData;
 
     [Inject]
-    public void SetDependency(GameData gameData)
-    {
+    public void SetDependency(GameData gameData) => 
       _gameData = gameData;
-    }
 
     private void Start() => 
       Image.sprite = _gameData.View.Background 

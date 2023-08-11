@@ -3,7 +3,7 @@ using UnityEngine;
 using XO.Gameplay.CodeBase.Player;
 using Zenject;
 
-namespace XO.Gameplay.CodeBase.Behaviours
+namespace XO.Gameplay.CodeBase.Behaviours.Buttons
 {
   public class HideGameObject : MonoBehaviour
   {
