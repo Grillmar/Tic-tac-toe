@@ -1,5 +1,4 @@
 ﻿using UnityEngine.UI;
-using XO.Gameplay.CodeBase;
 using XO.Modules.Progress;
 using Zenject;
 
@@ -23,11 +22,26 @@ namespace XO.Window.Windows.Settings
       _audioController = audioController;
     }
     
-    private void Awake()
+    private void Start()
     {
+      UpdateToggles();
+
       MusicToggle.onValueChanged.AddListener(UpdateMusic);
       SoundToggle.onValueChanged.AddListener(UpdateSound);
       Back.onClick.AddListener(CloseWindow);
+    }
+
+    private void OnDestroy()
+    {
+      MusicToggle.onValueChanged.RemoveListener(UpdateMusic);
+      SoundToggle.onValueChanged.RemoveListener(UpdateSound);
+      Back.onClick.RemoveListener(CloseWindow);
+    }
+
+    private void UpdateToggles()
+    {
+      MusicToggle.isOn = _progress.SettingsData.TurnMusic;
+      SoundToggle.isOn = _progress.SettingsData.TurnSound;
     }
 
     private void UpdateSound(bool value)
@@ -42,11 +56,6 @@ namespace XO.Window.Windows.Settings
       _audioController.Update();
     }
 
-    private void OnDestroy()
-    {
-      Back.onClick.RemoveListener(CloseWindow);
-
-    }
     private void CloseWindow() => 
       _windowService.Close(TypeId);
   }

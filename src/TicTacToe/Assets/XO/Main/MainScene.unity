@@ -1182,7 +1182,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &787085602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1258,6 +1258,7 @@ GameObject:
   - component: {fileID: 864539372}
   - component: {fileID: 864539371}
   - component: {fileID: 864539370}
+  - component: {fileID: 864539373}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -1365,6 +1366,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864539368}
   m_CullTransparentMesh: 0
+--- !u!114 &864539373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864539368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc21f24cad6d94743839edbb830548e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Button: {fileID: 864539370}
+  TypeId: 2
 --- !u!1 &1039822268
 GameObject:
   m_ObjectHideFlags: 0

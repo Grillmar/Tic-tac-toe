@@ -24,9 +24,10 @@ namespace XO.Bootstrap
       Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle();
       
       Container.BindInterfacesTo<ReadWriteProgress>().AsSingle();
-      Container.Bind<Progress>().AsSingle();
+
+      Container.Bind<AudioController>().AsSingle().NonLazy();
       
-      Container.BindInterfacesTo<AudioController>().AsSingle();
+      Container.Bind<Progress>().AsSingle();
 
       Container
         .BindStateMachine()

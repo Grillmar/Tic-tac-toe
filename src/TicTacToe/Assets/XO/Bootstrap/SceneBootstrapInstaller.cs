@@ -9,8 +9,7 @@ namespace XO.Bootstrap
 
     public override void InstallBindings()
     {
-      Container
-        .BindWindowService(WindowService);
+      Container.BindWindowService(WindowService);
     }
   }
 }
