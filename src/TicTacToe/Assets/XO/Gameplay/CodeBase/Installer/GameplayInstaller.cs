@@ -3,7 +3,7 @@ using XO.Gameplay.CodeBase.Player;
 using XO.Gameplay.CodeBase.Timer;
 using Zenject;
 
-namespace XO.Gameplay.CodeBase
+namespace XO.Gameplay.CodeBase.Installer
 {
   public class GameplayInstaller : MonoInstaller
   {

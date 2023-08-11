@@ -62,6 +62,12 @@ namespace XO.Gameplay.CodeBase
 
     public void Undo()
     {
+      if (IsGameFinish())
+      {
+        Debug.Log("The game was ended.");
+        return;
+      }
+      
       if (_history.Count == 0)
       {
         Debug.Log("The history is empty.");

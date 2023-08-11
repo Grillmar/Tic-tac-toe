@@ -8,11 +8,11 @@ namespace XO.Gameplay.CodeBase.Behaviours.Buttons
   {
     public Button Button;
     
-    private Game _gameLoop;
+    private Game _game;
 
     [Inject]
-    public void SetDependency(Game gameLoop) => 
-      _gameLoop = gameLoop;
+    public void SetDependency(Game game) => 
+      _game = game;
 
     public void Start() => 
       Button.onClick.AddListener(Undo);
@@ -21,6 +21,6 @@ namespace XO.Gameplay.CodeBase.Behaviours.Buttons
       Button.onClick.RemoveListener(Undo);
     
     private void Undo() => 
-      _gameLoop.Undo();
+      _game.Undo();
   }
 }
