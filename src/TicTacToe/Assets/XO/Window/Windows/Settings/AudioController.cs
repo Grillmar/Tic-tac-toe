@@ -1,9 +1,10 @@
 ﻿using UnityEngine.Audio;
 using XO.Modules.Progress;
+using Zenject;
 
 namespace XO.Window.Windows.Settings
 {
-  public class AudioController
+  public class AudioController : IInitializable
   {
     private const string Music = "music";
     private const string Sound = "sound";
@@ -17,10 +18,8 @@ namespace XO.Window.Windows.Settings
       _audioMixer = audioMixer;
     }
 
-    public void Initialize()
-    {
+    public void Initialize() => 
       Update();
-    }
 
     public void Update()
     {

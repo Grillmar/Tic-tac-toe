@@ -27,7 +27,7 @@ namespace XO.Bootstrap
       
       Container.BindInterfacesTo<ReadWriteProgress>().AsSingle();
 
-      Container.Bind<AudioController>().AsSingle().WithArguments(Mixer).NonLazy();;
+      Container.BindInterfacesAndSelfTo<AudioController>().AsSingle().WithArguments(Mixer).NonLazy();;
       
       Container.Bind<Progress>().AsSingle();
 
