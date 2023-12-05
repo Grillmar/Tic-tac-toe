@@ -18,7 +18,6 @@ namespace XO.Gameplay.CodeBase.Player
     {
       _game = game;
       Symbol = symbol;
-      _otherSymbol = GetEnemySymbol(symbol);
     }
 
     public void Enter() =>
@@ -35,14 +34,9 @@ namespace XO.Gameplay.CodeBase.Player
 
       (int row, int column) bestMove = Random.value < 0.5f 
         ? possibleMoves.RandomElement() 
-        : MinMax.FindBestMove(_game.GetCells(), Symbol, _otherSymbol);
+        : MinMax.FindBestMove(_game.GetCells(), Symbol);
       
       _game.Move(this,bestMove);
     }
-    
-    private static Symbol GetEnemySymbol(Symbol symbol) => 
-      symbol == Symbol.X 
-        ? Symbol.O 
-        : Symbol.X;
   }
 }

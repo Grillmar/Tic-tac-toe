@@ -9,14 +9,11 @@ namespace XO.Gameplay.CodeBase.Player
     public Symbol Symbol { get; private set; }
 
     private Game _game;
-
-    private Symbol _otherSymbol;
-
+    
     public void Initialize(Game game, Symbol symbol)
     {
       _game = game;
       Symbol = symbol;
-      _otherSymbol = GetEnemySymbol(symbol);
     }
 
     public void Enter() =>
@@ -31,14 +28,9 @@ namespace XO.Gameplay.CodeBase.Player
       if (!possibleMoves.Any())
         return;
 
-      (int row, int column) bestMove = MinMax.FindBestMove(_game.GetCells(), Symbol, _otherSymbol);
+      (int row, int column) bestMove = MinMax.FindBestMove(_game.GetCells(), Symbol);
       
       _game.Move(this, bestMove);
     }
-
-    private static Symbol GetEnemySymbol(Symbol symbol) => 
-      symbol == Symbol.X 
-        ? Symbol.O 
-        : Symbol.X;
   }
 }
