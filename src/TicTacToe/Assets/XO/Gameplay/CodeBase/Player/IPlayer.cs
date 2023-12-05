@@ -7,5 +7,6 @@ namespace XO.Gameplay.CodeBase.Player
     void Initialize(Game game, Symbol symbol);
 
     void Enter();
+    void Move((int row, int column) cell);
   }
 }

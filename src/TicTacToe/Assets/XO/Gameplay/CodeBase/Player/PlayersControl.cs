@@ -1,13 +1,13 @@
 ﻿namespace XO.Gameplay.CodeBase.Player
 {
-  public class PlayersInGame
+  public class PlayersControl
   {
     private readonly Game _game;
 
     private IPlayer _nextPlayer;
     private IPlayer _activePlayer;
 
-    public PlayersInGame(Game game, GameData gameData, IPlayerFactory playerFactory)
+    public PlayersControl(Game game, GameData gameData, IPlayerFactory playerFactory)
     {
       _game = game;
       _game.UpdateState += ChangePlayer;

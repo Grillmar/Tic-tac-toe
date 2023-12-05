@@ -20,7 +20,7 @@ namespace XO.Gameplay.CodeBase.Installer
       Container.Bind<HardComputer>().AsTransient();
 
       Container.BindInterfacesAndSelfTo<GameResult>().AsSingle();
-      Container.Bind<PlayersInGame>().AsSingle().NonLazy();
+      Container.Bind<PlayersControl>().AsSingle().NonLazy();
     }
   }
 }

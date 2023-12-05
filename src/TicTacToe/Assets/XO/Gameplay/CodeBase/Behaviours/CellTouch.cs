@@ -12,11 +12,11 @@ namespace XO.Gameplay.CodeBase.Behaviours
 
     private (int row, int column) _cell;
     
-    private PlayersInGame playersInGame;
+    private PlayersControl _playersControl;
 
     [Inject]
-    public void SetDependency(PlayersInGame playersInGame) => 
-      this.playersInGame = playersInGame;
+    public void SetDependency(PlayersControl playersControl) => 
+      _playersControl = playersControl;
 
     public void Initialize((int row, int column) cell) => 
       _cell = cell;
@@ -24,8 +24,7 @@ namespace XO.Gameplay.CodeBase.Behaviours
     public void OnPointerClick(PointerEventData eventData)
     {
       OnProduce?.Invoke();
-      if (playersInGame.GetActivePlayer() is RealPlayer realPlayer) 
-        realPlayer.Move(_cell);
+      _playersControl.GetActivePlayer().Move(_cell);
     }
   }
 }

@@ -22,7 +22,11 @@ namespace XO.Gameplay.CodeBase.Player
 
     public void Enter() =>
       RandomMove();
-    
+
+    public void Move((int row, int column) cell)
+    {
+    }
+
     private async void RandomMove()
     {
       await Task.Delay(1000);

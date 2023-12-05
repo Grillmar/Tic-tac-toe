@@ -8,8 +8,7 @@ namespace XO.Gameplay.CodeBase.Player
     public Symbol Symbol { get; private set; }
     
     private Game _game;
-
-
+    
     public void Initialize(Game game, Symbol symbol)
     {
       _game = game;
