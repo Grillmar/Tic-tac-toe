@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using XO.Gameplay.CodeBase.Behaviours;
 
 namespace XO.Gameplay.CodeBase.Player
 {
@@ -9,10 +8,7 @@ namespace XO.Gameplay.CodeBase.Player
     public Symbol Symbol { get; private set; }
     
     private Game _game;
-    private readonly TouchHolder _touchHolder;
 
-    public RealPlayer(TouchHolder touchHolder) => 
-      _touchHolder = touchHolder;
 
     public void Initialize(Game game, Symbol symbol)
     {
@@ -20,10 +16,11 @@ namespace XO.Gameplay.CodeBase.Player
       Symbol = symbol;
     }
 
-    public void Enter() => 
-      _touchHolder.OnTouchCell += Move;
+    public void Enter()
+    {
+    }
 
-    private void Move((int row, int column) cell)
+    public void Move((int row, int column) cell)
     {
       IList<(int row, int column)> possibleMoves = _game.GetPossibleMoves();
 
@@ -31,8 +28,6 @@ namespace XO.Gameplay.CodeBase.Player
         return;
       
       _game.Move(this, cell);
-      
-      _touchHolder.OnTouchCell -= Move;
     }
   }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using XO.Gameplay.CodeBase.Player;
 using Zenject;
 
 namespace XO.Gameplay.CodeBase.Behaviours
@@ -10,11 +11,12 @@ namespace XO.Gameplay.CodeBase.Behaviours
     public UnityEvent OnProduce;
 
     private (int row, int column) _cell;
-    private TouchHolder _touchHolder;
+    
+    private PlayersInGame playersInGame;
 
     [Inject]
-    public void SetDependency(TouchHolder touchHolder) => 
-      _touchHolder = touchHolder;
+    public void SetDependency(PlayersInGame playersInGame) => 
+      this.playersInGame = playersInGame;
 
     public void Initialize((int row, int column) cell) => 
       _cell = cell;
@@ -22,7 +24,8 @@ namespace XO.Gameplay.CodeBase.Behaviours
     public void OnPointerClick(PointerEventData eventData)
     {
       OnProduce?.Invoke();
-      _touchHolder.Touch(_cell);
+      if (playersInGame.GetActivePlayer() is RealPlayer realPlayer) 
+        realPlayer.Move(_cell);
     }
   }
 }
